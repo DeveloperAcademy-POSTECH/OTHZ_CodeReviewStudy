@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selectedTab = 0
     var body: some View {
         TabView {
-            Text("Heck")
+            HeckView()
                 .tabItem {
                     Image(systemName: "exclamationmark.bubble.fill")
                     Text("Heck")
                 }
-            Text("Nice")
+            NiceView()
                 .tabItem {
                     Image(systemName: "checkmark.bubble.fill")
                     Text("Nice")
                 }
-            Text("Issue")
+            IssueView()
                 .tabItem {
                     Image(systemName: "questionmark.bubble.fill")
                     Text("Issue")
