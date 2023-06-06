@@ -8,7 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selectedTab = 0
     var body: some View {
+        TabView {
+            HeckView()
+                .tabItem {
+                    Image(systemName: "exclamationmark.bubble.fill")
+                    Text("Heck")
+                }
+            NiceView()
+                .tabItem {
+                    Image(systemName: "checkmark.bubble.fill")
+                    Text("Nice")
+                }
+            IssueView()
+                .tabItem {
+                    Image(systemName: "questionmark.bubble.fill")
+                    Text("Issue")
+                }
+            
+        }
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
