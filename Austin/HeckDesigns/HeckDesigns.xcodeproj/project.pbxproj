@@ -51,8 +51,12 @@
 		95979FF82A2F4DB90004431D /* HeckDesigns */ = {
 			isa = PBXGroup;
 			children = (
-				95979FF92A2F4DB90004431D /* HeckDesignsApp.swift */,
+				9597A0092A2F50920004431D /* Model */,
+				9597A00A2A2F509D0004431D /* ViewModel */,
+				9597A0082A2F50810004431D /* Modifier */,
+				9597A0072A2F50750004431D /* View */,
 				95979FFB2A2F4DB90004431D /* ContentView.swift */,
+				95979FF92A2F4DB90004431D /* HeckDesignsApp.swift */,
 				95979FFD2A2F4DBA0004431D /* Assets.xcassets */,
 				95979FFF2A2F4DBA0004431D /* Preview Content */,
 			);
@@ -65,6 +69,34 @@
 				9597A0002A2F4DBA0004431D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9597A0072A2F50750004431D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9597A0082A2F50810004431D /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
+		9597A0092A2F50920004431D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9597A00A2A2F509D0004431D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
