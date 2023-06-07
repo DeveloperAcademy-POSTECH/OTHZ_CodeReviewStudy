@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedTab = 0
+    
     var body: some View {
         TabView {
+            
             HeckView()
                 .tabItem {
                     Image(systemName: "exclamationmark.bubble.fill")
@@ -26,7 +28,6 @@ struct ContentView: View {
                     Image(systemName: "questionmark.bubble.fill")
                     Text("Issue")
                 }
-            
         }
         VStack {
             Image(systemName: "globe")
