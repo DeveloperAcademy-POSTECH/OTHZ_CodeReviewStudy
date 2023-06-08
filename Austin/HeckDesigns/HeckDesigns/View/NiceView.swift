@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NiceView: View {
+
     var body: some View {
         VStack {
             Text("what a Nice")
