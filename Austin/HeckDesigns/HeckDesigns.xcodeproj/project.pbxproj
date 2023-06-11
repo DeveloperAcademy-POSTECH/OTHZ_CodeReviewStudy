@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9552C7FF2A31748100417339 /* HeckDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552C7FE2A31748100417339 /* HeckDetailView.swift */; };
+		9552C7FF2A31748100417339 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552C7FE2A31748100417339 /* ListItemView.swift */; };
 		9552C8012A31D04800417339 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552C8002A31D04800417339 /* Model.swift */; };
 		9552C8032A35F88000417339 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552C8022A35F88000417339 /* ImageModifier.swift */; };
 		9552C8062A35FCD600417339 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552C8052A35FCD600417339 /* ViewExtension.swift */; };
@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9552C7FE2A31748100417339 /* HeckDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeckDetailView.swift; sourceTree = "<group>"; };
+		9552C7FE2A31748100417339 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		9552C8002A31D04800417339 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		9552C8022A35F88000417339 /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 		9552C8052A35FCD600417339 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 				9597A00B2A2F5BD50004431D /* HeckView.swift */,
 				9597A00D2A2F5BDF0004431D /* NiceView.swift */,
 				9597A00F2A2F5BE70004431D /* IssueView.swift */,
-				9552C7FE2A31748100417339 /* HeckDetailView.swift */,
+				9552C7FE2A31748100417339 /* ListItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,7 +214,7 @@
 				95979FFC2A2F4DB90004431D /* ContentView.swift in Sources */,
 				9552C8032A35F88000417339 /* ImageModifier.swift in Sources */,
 				9597A00C2A2F5BD50004431D /* HeckView.swift in Sources */,
-				9552C7FF2A31748100417339 /* HeckDetailView.swift in Sources */,
+				9552C7FF2A31748100417339 /* ListItemView.swift in Sources */,
 				9597A0102A2F5BE70004431D /* IssueView.swift in Sources */,
 				95979FFA2A2F4DB90004431D /* HeckDesignsApp.swift in Sources */,
 				9552C80C2A3604DC00417339 /* ColorExtension.swift in Sources */,

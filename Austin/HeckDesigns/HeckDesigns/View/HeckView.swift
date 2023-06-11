@@ -10,8 +10,8 @@ import SwiftUI
 
 
 struct HeckView: View {
-    @State var listSize = 4
-    @ObservedObject var model = HeckModel.instance
+
+    @ObservedObject var model = Model.instance
     
     let columns = [
             GridItem(.adaptive(minimum: 170))
@@ -25,11 +25,12 @@ struct HeckView: View {
                     
                     ForEach(model.heckList, id: \.self) { item in
                         NavigationLink {
-                            HeckDetailView(item: item)
+                            ListItemView(item: item)
                         } label: {
                             VStack(alignment: .leading) {
                                 Image(item.imageName)
                                     .resizable()
+                                    .scaledToFill()
                                     .frame(width: 170, height: 170)
                                     .cornerRadius(10)
                                 Text(item.title)
