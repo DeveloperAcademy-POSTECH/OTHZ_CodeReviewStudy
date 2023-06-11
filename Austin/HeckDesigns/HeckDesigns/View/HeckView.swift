@@ -7,27 +7,15 @@
 
 import SwiftUI
 
-struct HeckItem: Hashable {
-    var title: String
-    var imageName: String
-    var description: String = ""
-    var id = UUID()
-}
+
 
 struct HeckView: View {
     @State var listSize = 4
-    @State var heckList = [
-        HeckItem(title: "감성과 안전사이", imageName: "heck0"),
-        HeckItem(title: "아 뭘 사랑하냐고", imageName: "heck1"),
-        HeckItem(title: "따뜻한 콜드브루", imageName: "heck2"),
-        HeckItem(title: "취소할 권리", imageName: "heck3"),
-        HeckItem(title: "선을 넘은 자", imageName: "heck4"),
-        HeckItem(title: "손목 지압용 책상", imageName: "heck5"),
-    ]
+    @ObservedObject var model = HeckModel.instance
+    
     let columns = [
             GridItem(.adaptive(minimum: 170))
         ]
-    
     
     
     var body: some View {
@@ -35,7 +23,7 @@ struct HeckView: View {
             ScrollView {
                 LazyVGrid(columns: columns) {
                     
-                    ForEach(heckList, id: \.self) { item in
+                    ForEach(model.heckList, id: \.self) { item in
                         NavigationLink {
                             HeckDetailView(item: item)
                         } label: {
