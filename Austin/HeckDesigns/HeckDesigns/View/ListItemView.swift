@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListItemView: View {
-    var item: HeckItem
+    var item: ListItem
     var body: some View {
         VStack {
             VStack(alignment: .center) {
@@ -41,7 +41,7 @@ struct ListItemView: View {
 
 struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ListItemView(item: HeckItem(
+        ListItemView(item: ListItem(
             title: "감성과 안전사이",
             imageName: "heck0",
             description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
