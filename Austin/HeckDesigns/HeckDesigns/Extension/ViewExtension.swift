@@ -11,4 +11,13 @@ extension View {
     func detailViewImage() -> some View{
         modifier(ImageDetailViewModifier())
     }
+    
+    func title() -> some View {
+        modifier(TitleTextModifier())
+    }
+    
+    func description() -> some View {
+        modifier(DescriptionTextModifier())
+    }
 }
+
