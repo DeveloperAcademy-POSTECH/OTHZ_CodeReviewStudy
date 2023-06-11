@@ -29,13 +29,6 @@ struct ContentView: View {
                     Text("Issue")
                 }
         }
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
     }
 }
 
