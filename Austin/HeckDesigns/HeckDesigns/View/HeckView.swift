@@ -25,7 +25,7 @@ struct HeckView: View {
                     
                     ForEach(model.heckList, id: \.self) { item in
                         NavigationLink {
-                            HeckDetailView(item: item)
+                            ListItemView(item: item)
                         } label: {
                             VStack(alignment: .leading) {
                                 Image(item.imageName)
