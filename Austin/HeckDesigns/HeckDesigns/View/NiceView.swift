@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NiceView: View {
+    @State var showAddModal = false
     @ObservedObject var model = Model.instance
     
     let columns = [
@@ -36,6 +37,20 @@ struct NiceView: View {
                         }
                     }
                 }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showAddModal = true
+                    } label: {
+                        Label("Edit", systemImage: "plus.circle")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                    }
+                }
+            }
+            .sheet(isPresented: $showAddModal) {
+                AddItemView()
             }
             .navigationTitle("Nice")
         }

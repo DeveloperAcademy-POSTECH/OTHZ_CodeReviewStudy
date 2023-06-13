@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HeckGroup: String {
+enum GroupType: String {
     case Heck
     case Nice
     case Issue
@@ -17,7 +17,7 @@ struct ListItem: Hashable {
     var title: String
     var imageName: String
     var description: String = ""
-    var group: HeckGroup
+    var group: GroupType
     var id = UUID()
 }
 

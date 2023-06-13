@@ -25,3 +25,4 @@ struct DescriptionTextModifier: ViewModifier {
             .lineSpacing(6)
     }
 }
+

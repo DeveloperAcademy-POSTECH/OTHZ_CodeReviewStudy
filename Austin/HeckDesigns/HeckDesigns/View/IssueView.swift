@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IssueView: View {
+    @State var showAddModal = false
     @ObservedObject var model = Model.instance
 //    let columns = [GridItem(.adaptive(minimum: 170))]
     
@@ -40,6 +41,20 @@ struct IssueView: View {
                     }
                 }
                 .padding()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showAddModal = true
+                    } label: {
+                        Label("Edit", systemImage: "plus.circle")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                    }
+                }
+            }
+            .sheet(isPresented: $showAddModal) {
+                AddItemView()
             }
             .navigationTitle("Nice")
         }
