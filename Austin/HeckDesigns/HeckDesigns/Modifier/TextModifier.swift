@@ -26,3 +26,11 @@ struct DescriptionTextModifier: ViewModifier {
     }
 }
 
+struct NavButtonTextModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("Apple SD Gothic Neo", size: 18))
+            .fontWeight(.medium)
+    }
+}
+

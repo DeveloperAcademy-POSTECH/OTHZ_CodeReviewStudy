@@ -16,12 +16,12 @@ struct IssueView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    ForEach(model.issueList, id: \.self) { item in
+                    ForEach($model.issueList, id: \.self) { $item in
                         NavigationLink {
-                            ListItemView(item: item)
+                            ListItemView(item: $item)
                         } label: {
                             HStack (alignment: .top) {
-                                Image(item.imageName)
+                                Image(uiImage: item.image)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 170, height: 170)
@@ -32,10 +32,8 @@ struct IssueView: View {
                                     Text(item.title)
                                         .font(Font.system(size: 20, weight: .bold))
                                         .foregroundColor(Color.black)
-                                    
                                 }
-                                Spacer()
-                                    
+                                Spacer()       
                             }
                         }
                     }
@@ -47,14 +45,14 @@ struct IssueView: View {
                     Button {
                         showAddModal = true
                     } label: {
-                        Label("Edit", systemImage: "plus.circle")
+                        Label("Edit", systemImage: "plus")
                             .font(.title2)
                             .fontWeight(.semibold)
                     }
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView()
+                AddItemView(selectedType: .Issue)
             }
             .navigationTitle("Nice")
         }

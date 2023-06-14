@@ -12,6 +12,8 @@ struct AddItemView: View {
     @State var title = ""
     @State var description = ""
     @State var selectedType: GroupType = .Heck
+    @State var selectedImage = UIImage(named: "addItemDefault")!
+    @State var isSelecting = false
     var groupTypes: [GroupType] = [.Heck, .Nice, .Issue]
     var model = Model.instance
     
@@ -19,6 +21,15 @@ struct AddItemView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Image(uiImage: selectedImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 400)
+                    .onTapGesture {
+                        isSelecting = true
+                    }
+                
                 HStack {
                     Text("분류")
                         .font(.custom("Apple SD Gothic Neo", size: 16))
@@ -81,7 +92,7 @@ struct AddItemView: View {
                     model.heckList.append(
                         ListItem(
                             title: title,
-                            imageName: "heck0",
+                            image: selectedImage,
                             description: description,
                             group: .Heck
                         )
@@ -90,7 +101,7 @@ struct AddItemView: View {
                     model.issueList.append(
                         ListItem(
                             title: title,
-                            imageName: "heck0",
+                            image: selectedImage,
                             description: description,
                             group: .Heck
                         )
@@ -99,7 +110,7 @@ struct AddItemView: View {
                     model.niceList.append(
                         ListItem(
                             title: title,
-                            imageName: "heck0",
+                            image: selectedImage,
                             description: description,
                             group: .Heck
                         )
@@ -108,6 +119,9 @@ struct AddItemView: View {
                 presentationMode.wrappedValue.dismiss()
             }))
             .navigationBarTitle("새로운 아이템", displayMode: .inline)
+            .sheet(isPresented: $isSelecting) {
+                ImagePicker(selectedImage: $selectedImage)
+            }
         }
     }
 }

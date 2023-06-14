@@ -23,12 +23,12 @@ struct HeckView: View {
             ScrollView {
                 LazyVGrid(columns: columns) {
                     
-                    ForEach(model.heckList, id: \.self) { item in
+                    ForEach($model.heckList, id: \.self) { $item in
                         NavigationLink {
-                            ListItemView(item: item)
+                            ListItemView(item: $item)
                         } label: {
                             VStack(alignment: .leading) {
-                                Image(item.imageName)
+                                Image(uiImage: item.image)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 170, height: 170)
@@ -47,14 +47,14 @@ struct HeckView: View {
                     Button {
                         showAddModal = true
                     } label: {
-                        Label("Edit", systemImage: "plus.circle")
+                        Label("Edit", systemImage: "plus")
                             .font(.title2)
                             .fontWeight(.semibold)
                     }
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView()
+                AddItemView(selectedType: .Heck)
             }
         }
     }
