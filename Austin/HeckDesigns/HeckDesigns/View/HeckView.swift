@@ -8,7 +8,6 @@
 import SwiftUI
 
 
-
 struct HeckView: View {
     @State var showAddModal = false
     @ObservedObject var model = Model.instance
@@ -48,7 +47,7 @@ struct HeckView: View {
                         showAddModal = true
                     } label: {
                         Label("Edit", systemImage: "plus")
-                            .font(.title2)
+                            .navButton()
                             .fontWeight(.semibold)
                     }
                 }

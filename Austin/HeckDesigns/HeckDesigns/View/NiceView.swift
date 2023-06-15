@@ -43,7 +43,7 @@ struct NiceView: View {
                         showAddModal = true
                     } label: {
                         Label("Edit", systemImage: "plus")
-                            .font(.title2)
+                            .navButton()
                             .fontWeight(.semibold)
                     }
                 }
