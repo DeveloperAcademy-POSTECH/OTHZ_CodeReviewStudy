@@ -8,9 +8,8 @@
 import SwiftUI
 
 
-
 struct HeckView: View {
-
+    @State var showAddModal = false
     @ObservedObject var model = Model.instance
     
     let columns = [
@@ -23,12 +22,12 @@ struct HeckView: View {
             ScrollView {
                 LazyVGrid(columns: columns) {
                     
-                    ForEach(model.heckList, id: \.self) { item in
+                    ForEach($model.heckList, id: \.self) { $item in
                         NavigationLink {
-                            ListItemView(item: item)
+                            ListItemView(item: $item)
                         } label: {
                             VStack(alignment: .leading) {
-                                Image(item.imageName)
+                                Image(uiImage: item.image)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 170, height: 170)
@@ -42,6 +41,20 @@ struct HeckView: View {
                 }
             }
             .navigationTitle("Hecks")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showAddModal = true
+                    } label: {
+                        Label("Edit", systemImage: "plus")
+                            .navButton()
+                            .fontWeight(.semibold)
+                    }
+                }
+            }
+            .sheet(isPresented: $showAddModal) {
+                AddItemView(selectedType: .Heck)
+            }
         }
     }
 }

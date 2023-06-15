@@ -11,9 +11,9 @@ struct ImageDetailViewModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .scaledToFit()
-            .cornerRadius(10)
+            .padding(.top, 10)
             .shadow(radius: 4)
-            .padding()
+            
+            
     }
 }

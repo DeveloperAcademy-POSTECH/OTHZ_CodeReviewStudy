@@ -19,5 +19,8 @@ extension View {
     func description() -> some View {
         modifier(DescriptionTextModifier())
     }
+    func navButton() -> some View {
+        modifier(NavButtonTextModifier())
+    }
 }
 

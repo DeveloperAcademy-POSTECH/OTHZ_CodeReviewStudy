@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NiceView: View {
+    @State var showAddModal = false
     @ObservedObject var model = Model.instance
     
     let columns = [
@@ -18,13 +19,12 @@ struct NiceView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    
-                    ForEach(model.niceList, id: \.self) { item in
+                    ForEach($model.niceList, id: \.self) { $item in
                         NavigationLink {
-                            ListItemView(item: item)
+                            ListItemView(item: $item)
                         } label: {
                             VStack(alignment: .leading) {
-                                Image(item.imageName)
+                                Image(uiImage: item.image)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 170, height: 170)
@@ -36,6 +36,20 @@ struct NiceView: View {
                         }
                     }
                 }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showAddModal = true
+                    } label: {
+                        Label("Edit", systemImage: "plus")
+                            .navButton()
+                            .fontWeight(.semibold)
+                    }
+                }
+            }
+            .sheet(isPresented: $showAddModal) {
+                AddItemView(selectedType: .Nice)
             }
             .navigationTitle("Nice")
         }

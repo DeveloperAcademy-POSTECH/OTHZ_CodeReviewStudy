@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IssueView: View {
+    @State var showAddModal = false
     @ObservedObject var model = Model.instance
 //    let columns = [GridItem(.adaptive(minimum: 170))]
     
@@ -15,12 +16,12 @@ struct IssueView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    ForEach(model.issueList, id: \.self) { item in
+                    ForEach($model.issueList, id: \.self) { $item in
                         NavigationLink {
-                            ListItemView(item: item)
+                            ListItemView(item: $item)
                         } label: {
                             HStack (alignment: .top) {
-                                Image(item.imageName)
+                                Image(uiImage: item.image)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 170, height: 170)
@@ -31,15 +32,27 @@ struct IssueView: View {
                                     Text(item.title)
                                         .font(Font.system(size: 20, weight: .bold))
                                         .foregroundColor(Color.black)
-                                    
                                 }
-                                Spacer()
-                                    
+                                Spacer()       
                             }
                         }
                     }
                 }
                 .padding()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showAddModal = true
+                    } label: {
+                        Label("Edit", systemImage: "plus")
+                            .navButton()
+                            .fontWeight(.semibold)
+                    }
+                }
+            }
+            .sheet(isPresented: $showAddModal) {
+                AddItemView(selectedType: .Issue)
             }
             .navigationTitle("Nice")
         }
