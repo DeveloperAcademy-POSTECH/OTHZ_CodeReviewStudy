@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "heck5.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "heck5.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },

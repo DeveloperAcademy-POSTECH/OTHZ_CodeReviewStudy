@@ -15,6 +15,12 @@ extension View {
     func title() -> some View {
         modifier(TitleTextModifier())
     }
+    func subTitle() -> some View {
+        modifier(SubTitleTextModifier())
+    }
+    func smallTitle() -> some View {
+        modifier(SmallTitleTextModifier())
+    }
     
     func description() -> some View {
         modifier(DescriptionTextModifier())
