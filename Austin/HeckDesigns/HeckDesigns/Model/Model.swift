@@ -84,7 +84,8 @@ class Model: ObservableObject {
             title: "다정한 기다림",
             image: UIImage(named: "nice0")!,
             description: "흰 화면을 10초동안 보는 것은 정말 마음을 어렵게 한다. 스켈레톤 UI는 1초 이상의 기다림에 대해 로딩에 대한 친절한 안내를 제공해준다.",
-            group: .Nice
+            group: .Nice,
+            isFavorite: true
         ),
         ListItem(
             title: "완벽한 구매 경험",
@@ -96,7 +97,8 @@ class Model: ObservableObject {
             title: "지도는 네이버",
             image: UIImage(named: "nice2")!,
             description: "머리를 하기 위해 집 근처에 헤어샵을 네이버로 예약했다. 네이버 지도에 내가 예약한 헤어샵 위치에 예약한 날짜와 시간을 알려주었다. 네이버는 예약 당일에 푸시로 예약 내용을  알려주는데 이렇게 위치에 따라 예약한 시간을 알려줌으로 여러 예약과 일정이 있을 경우 더 쉽게 계획을 세울 수 있다는 점에서 좋은 사용성 경험을 제공해준다.",
-            group: .Nice
+            group: .Nice,
+            isFavorite: true
         ),
     ]
     
@@ -105,7 +107,8 @@ class Model: ObservableObject {
             title: "베라 매장용 컵",
             image: UIImage(named: "issue0")!,
             description: "매장용 컵에 위와 같이 매장용 컵에 대한 안내를 붙였다. 확실한 방법이긴하나 투썸과 같이 자체 컵에 프린팅을 하는 방법도 있을 것 같은데 과연 매장용 컵 표시에 대한 최선의 솔루션이었을까?",
-            group: .Issue
+            group: .Issue,
+            isFavorite: true
         ),
     ]
 }

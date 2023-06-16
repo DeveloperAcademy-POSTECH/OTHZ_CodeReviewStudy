@@ -23,6 +23,7 @@
 		9597A00C2A2F5BD50004431D /* HeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A00B2A2F5BD50004431D /* HeckView.swift */; };
 		9597A00E2A2F5BDF0004431D /* NiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A00D2A2F5BDF0004431D /* NiceView.swift */; };
 		9597A0102A2F5BE70004431D /* IssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A00F2A2F5BE70004431D /* IssueView.swift */; };
+		95B5168E2A3C159D00D04B69 /* FavoriteSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */; };
 		95F6E4462A3834190024D0A9 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6E4452A3834190024D0A9 /* ImagePickerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		9597A00B2A2F5BD50004431D /* HeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeckView.swift; sourceTree = "<group>"; };
 		9597A00D2A2F5BDF0004431D /* NiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceView.swift; sourceTree = "<group>"; };
 		9597A00F2A2F5BE70004431D /* IssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueView.swift; sourceTree = "<group>"; };
+		95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSampleView.swift; sourceTree = "<group>"; };
 		95F6E4452A3834190024D0A9 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 				9597A0092A2F50920004431D /* Model */,
 				9597A00A2A2F509D0004431D /* ViewModel */,
 				9597A0072A2F50750004431D /* View */,
+				95B5168C2A3C155E00D04B69 /* Components */,
 				9597A0082A2F50810004431D /* Modifier */,
 				9552C8042A35FCBC00417339 /* Extension */,
 				95979FFB2A2F4DB90004431D /* ContentView.swift */,
@@ -144,6 +147,14 @@
 			children = (
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		95B5168C2A3C155E00D04B69 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +239,7 @@
 				9552C80E2A36F4E400417339 /* AddItemView.swift in Sources */,
 				9597A0102A2F5BE70004431D /* IssueView.swift in Sources */,
 				95F6E4462A3834190024D0A9 /* ImagePickerView.swift in Sources */,
+				95B5168E2A3C159D00D04B69 /* FavoriteSampleView.swift in Sources */,
 				95979FFA2A2F4DB90004431D /* HeckDesignsApp.swift in Sources */,
 				9552C80C2A3604DC00417339 /* ColorExtension.swift in Sources */,
 				9597A00E2A2F5BDF0004431D /* NiceView.swift in Sources */,

@@ -13,57 +13,11 @@ struct HeckView: View {
     @ObservedObject var model = Model.instance
     
     let columns = [ GridItem(.adaptive(minimum: 170)) ]
-
-
-    
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
-                    HStack(alignment: .center) {
-                        Text("Favorite")
-                            .subTitle()
-                        Image(systemName: "star.fill")
-                            .foregroundColor(Color.yellow)
-                        Spacer()
-                        NavigationLink {
-                            FavoritesView()
-                        } label: {
-                            Text("전체보기")
-                                .navButton()
-                        }
-                    }
-                    
-                    ScrollView(.horizontal){
-                        HStack {
-                            ForEach($model.heckList, id: \.self) { $item in
-                                if item.isFavorite == true {
-                                    NavigationLink {
-                                        ListItemView(item: $item)
-                                    } label: {
-                                        VStack(alignment: .leading) {
-                                            Image(uiImage: item.image)
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 140, height: 140)
-                                                .cornerRadius(10)
-                                            Text(item.title)
-                                                .font(Font.system(size: 18, weight: .semibold))
-                                                .foregroundColor(Color.textBlack)
-                                        }
-                                    }
-                                }
-                            }
-                            
-                        }
-                        
-                        
-                    }
-                    
-                }
-                .padding()
-                
+                FavoriteSampleView(groupType: .Heck)
                 
                 LazyVGrid(columns: columns) {
                     ForEach($model.heckList, id: \.self) { $item in
@@ -71,11 +25,26 @@ struct HeckView: View {
                             ListItemView(item: $item)
                         } label: {
                             VStack(alignment: .leading) {
-                                Image(uiImage: item.image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 170, height: 170)
-                                    .cornerRadius(10)
+                                ZStack {
+                                    Image(uiImage: item.image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 170, height: 170)
+                                        .cornerRadius(10)
+                                    if item.isFavorite == true {
+                                        VStack {
+                                            Spacer()
+                                                .frame(height: 140)
+                                            HStack {
+                                                Spacer()
+                                                    .frame(width: 140)
+                                                Image(systemName: "star.fill")
+                                                    .foregroundColor(Color.white)
+                                                    .opacity(0.9)
+                                            }
+                                        }
+                                    }
+                                }
                                 Text(item.title)
                                     .font(Font.system(size: 18, weight: .semibold))
                                     .foregroundColor(Color.textBlack)

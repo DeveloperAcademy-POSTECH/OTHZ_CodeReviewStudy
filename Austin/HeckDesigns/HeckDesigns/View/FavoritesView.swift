@@ -9,13 +9,15 @@ import SwiftUI
 
 struct FavoritesView: View {
     @ObservedObject var model = Model.instance
+    var groupType: GroupType = .Heck
     let columns = [ GridItem(.adaptive(minimum: 170)) ]
+    @State var gridList = Model.instance.heckList
     
     var body: some View {
         ScrollView {
             
             LazyVGrid(columns: columns) {
-                ForEach($model.heckList, id: \.self) { $item in
+                ForEach($gridList, id: \.self) { $item in
                     if item.isFavorite == true {
                         NavigationLink {
                             ListItemView(item: $item)
@@ -33,6 +35,15 @@ struct FavoritesView: View {
                         }
                     }
                 }
+            }
+        }
+        .onAppear {
+            if groupType == .Heck {
+                gridList = model.heckList
+            } else if groupType == .Issue {
+                gridList = model.issueList
+            } else if groupType == .Nice {
+                gridList = model.niceList
             }
         }
         .navigationTitle("Favorites")

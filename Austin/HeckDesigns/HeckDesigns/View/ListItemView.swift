@@ -31,6 +31,7 @@ struct ListItemView: View {
         VStack {
             VStack(alignment: .center) {
                 if isEdit == true {
+                    
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
@@ -41,7 +42,9 @@ struct ListItemView: View {
                         .onTapGesture {
                             isSelectingImage = true
                         }
+                    
                 } else {
+                
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
