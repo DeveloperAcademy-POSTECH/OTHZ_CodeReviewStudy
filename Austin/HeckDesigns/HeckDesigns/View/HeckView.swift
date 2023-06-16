@@ -21,7 +21,6 @@ struct HeckView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    
                     ForEach($model.heckList, id: \.self) { $item in
                         NavigationLink {
                             ListItemView(item: $item)
@@ -33,8 +32,8 @@ struct HeckView: View {
                                     .frame(width: 170, height: 170)
                                     .cornerRadius(10)
                                 Text(item.title)
-                                    .font(Font.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color.black)
+                                    .font(Font.system(size: 18, weight: .semibold))
+                                    .foregroundColor(Color.textBlack)
                             }
                         }
                     }

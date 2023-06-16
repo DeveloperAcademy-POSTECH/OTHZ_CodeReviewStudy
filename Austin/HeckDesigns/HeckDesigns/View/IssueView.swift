@@ -30,8 +30,8 @@ struct IssueView: View {
                                     .frame(width: 20)
                                 VStack {
                                     Text(item.title)
-                                        .font(Font.system(size: 20, weight: .bold))
-                                        .foregroundColor(Color.black)
+                                        .font(Font.system(size: 18, weight: .semibold))
+                                        .foregroundColor(Color.textBlack)
                                 }
                                 Spacer()       
                             }

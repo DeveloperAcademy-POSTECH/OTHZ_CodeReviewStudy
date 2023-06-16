@@ -30,8 +30,8 @@ struct NiceView: View {
                                     .frame(width: 170, height: 170)
                                     .cornerRadius(10)
                                 Text(item.title)
-                                    .font(Font.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color.black)
+                                    .font(Font.system(size: 18, weight: .semibold))
+                                    .foregroundColor(Color.textBlack)
                             }
                         }
                     }
