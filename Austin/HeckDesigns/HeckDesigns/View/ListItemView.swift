@@ -9,19 +9,23 @@ import SwiftUI
 
 struct ListItemView: View {
     @Environment(\.presentationMode) var presentationMode
-    
+    let model = Model.instance
     enum Field: Hashable {
         case title, description
     }
+    @Binding var item: ListItem
+    
     @State var isEdit = false
     @State var isDelete = false
     @State var isSelectingImage = false
-    @Binding var item: ListItem
+    
     @State var image = UIImage(named: "addItemDefault")!
     @State var title = ""
     @State var description = ""
+    @State var isFavorite = false
+    
     @FocusState private var focusField: Field?
-    let model = Model.instance
+    
     
     var body: some View {
         VStack {
@@ -63,6 +67,26 @@ struct ListItemView: View {
                 }
                 
                 Divider()
+                HStack {
+                    Button {
+                        item.isFavorite.toggle()
+                        isFavorite.toggle()
+                    } label: {
+                        if isFavorite == true {
+                            Image(systemName: "star.fill")
+                                .font(.system(size: 20))
+                                .foregroundColor(.yellow)
+                        } else {
+                            Image(systemName: "star")
+                                .font(.system(size: 20))
+                                .foregroundColor(Color.textBlack)
+                        }
+                    }
+
+
+                    Spacer()
+                }
+                .frame(height: 25)
                 Spacer()
                     .frame(height: 20)
                 ScrollView {
@@ -157,6 +181,7 @@ struct ListItemView: View {
             self.title = item.title
             self.description = item.description
             self.image = item.image
+            self.isFavorite = item.isFavorite
             focusField = .title
         }
         .sheet(isPresented: $isSelectingImage) {

@@ -18,6 +18,7 @@ struct ListItem: Hashable {
     var image: UIImage
     var description: String = ""
     var group: GroupType
+    var isFavorite = false
     var id = UUID()
 }
 
@@ -30,7 +31,8 @@ class Model: ObservableObject {
             title: "감성과 안전사이",
             image: UIImage(named: "heck0")!,
             description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
-            group: .Heck
+            group: .Heck,
+            isFavorite: true
         ),
         ListItem(
             title: "아 뭘 사랑하냐고",
@@ -42,7 +44,8 @@ class Model: ObservableObject {
             title: "따뜻한 콜드브루",
             image: UIImage(named: "heck2")!,
             description: "따듯하게 콜드브루를 마실 수도 있다. 하지만 차가운 콜드브루는 왜 없는 것인가.",
-            group: .Heck
+            group: .Heck,
+            isFavorite: true
         ),
         ListItem(
             title: "취소할 권리",
@@ -71,7 +74,7 @@ class Model: ObservableObject {
         ListItem(
             title: "인생은 실전이다",
             image: UIImage(named: "heck7")!,
-            description: "그린카에서 비밀번호를 재설정해야 했다. 하지만 재설정 오류라고 뜨면서 다시 처음부터 사용자 인증 페이지로 이동하게 되었다. 비밀번호 재설정이 틀렸다고 로그인페이지로 이동하는 사용성은 태어나서 처음이다. 그린카는 서비스를 하고 싶은걸까. UX 디자이너가 그린카를 망하게 하고 싶은걸까.",
+            description: "그린카에서 비밀번호를 재설정해야 했다. 하지만 재설정 오류라고 뜨면서 다시 처음부터 사용자 인증 페이지로 이동하게 되었다. 비밀번호 재설정이 틀렸다고 로그인페이지로 이동하는 사용성은 태어나서 처음이다. 그린카는 서비스를 하고 싶은걸까. 아님 UX 디자이너가 그린카를 망하게 하고 싶은걸까.",
             group: .Heck
         ),
     ]

@@ -12,14 +12,59 @@ struct HeckView: View {
     @State var showAddModal = false
     @ObservedObject var model = Model.instance
     
-    let columns = [
-            GridItem(.adaptive(minimum: 170))
-        ]
+    let columns = [ GridItem(.adaptive(minimum: 170)) ]
+
+
     
     
     var body: some View {
         NavigationStack {
             ScrollView {
+                VStack {
+                    HStack(alignment: .center) {
+                        Text("Favorite")
+                            .subTitle()
+                        Image(systemName: "star.fill")
+                            .foregroundColor(Color.yellow)
+                        Spacer()
+                        NavigationLink {
+                            FavoritesView()
+                        } label: {
+                            Text("전체보기")
+                                .navButton()
+                        }
+                    }
+                    
+                    ScrollView(.horizontal){
+                        HStack {
+                            ForEach($model.heckList, id: \.self) { $item in
+                                if item.isFavorite == true {
+                                    NavigationLink {
+                                        ListItemView(item: $item)
+                                    } label: {
+                                        VStack(alignment: .leading) {
+                                            Image(uiImage: item.image)
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 140, height: 140)
+                                                .cornerRadius(10)
+                                            Text(item.title)
+                                                .font(Font.system(size: 18, weight: .semibold))
+                                                .foregroundColor(Color.textBlack)
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                }
+                .padding()
+                
+                
                 LazyVGrid(columns: columns) {
                     ForEach($model.heckList, id: \.self) { $item in
                         NavigationLink {
