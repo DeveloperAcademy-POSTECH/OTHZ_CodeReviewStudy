@@ -27,13 +27,17 @@ struct IssueView: View {
                                     .frame(width: 170, height: 170)
                                     .cornerRadius(10)
                                 Spacer()
-                                    .frame(width: 20)
-                                VStack {
+                                    .frame(width: 15)
+                                VStack(alignment: .leading) {
                                     Text(item.title)
-                                        .font(Font.system(size: 18, weight: .semibold))
+                                        .smallTitle()
                                         .foregroundColor(Color.textBlack)
+                                    Divider()
+                                    Text(item.description)
+                                        .description()
+                                        .multilineTextAlignment(.leading)
+                                        .lineLimit(5)
                                 }
-                                Spacer()       
                             }
                         }
                     }
@@ -54,7 +58,7 @@ struct IssueView: View {
             .sheet(isPresented: $showAddModal) {
                 AddItemView(selectedType: .Issue)
             }
-            .navigationTitle("Nice")
+            .navigationTitle("Issue")
         }
     }
 }

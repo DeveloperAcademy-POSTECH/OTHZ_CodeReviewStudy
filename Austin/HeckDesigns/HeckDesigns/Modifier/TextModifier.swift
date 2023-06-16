@@ -23,6 +23,14 @@ struct SubTitleTextModifier: ViewModifier {
             .foregroundColor(Color.textBlack)
     }
 }
+struct SmallTitleTextModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 20))
+            .fontWeight(.semibold)
+            .foregroundColor(Color.textBlack)
+    }
+}
 
 struct DescriptionTextModifier: ViewModifier {
     func body(content: Content) -> some View {
