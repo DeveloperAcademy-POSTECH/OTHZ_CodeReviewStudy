@@ -15,7 +15,7 @@ enum GroupType: String {
 
 struct ListItem: Hashable {
     var title: String
-    var image: UIImage
+    var image: UIImage = UIImage(named: "heck0")!
     var description: String = ""
     var group: GroupType
     var isFavorite = false
