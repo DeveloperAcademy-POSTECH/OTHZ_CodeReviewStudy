@@ -26,6 +26,7 @@
 		95A5F84F2A4040C000F781FB /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A5F84E2A4040C000F781FB /* DBHelper.swift */; };
 		95A5F8542A40476A00F781FB /* HeckDesignTableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A5F8532A40476A00F781FB /* HeckDesignTableProtocol.swift */; };
 		95B5168E2A3C159D00D04B69 /* FavoriteSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */; };
+		95F57DBA2A4167AF00516E46 /* DBTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F57DB92A4167AF00516E46 /* DBTestView.swift */; };
 		95F6E4462A3834190024D0A9 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6E4452A3834190024D0A9 /* ImagePickerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		95A5F84E2A4040C000F781FB /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		95A5F8532A40476A00F781FB /* HeckDesignTableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeckDesignTableProtocol.swift; sourceTree = "<group>"; };
 		95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSampleView.swift; sourceTree = "<group>"; };
+		95F57DB92A4167AF00516E46 /* DBTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTestView.swift; sourceTree = "<group>"; };
 		95F6E4452A3834190024D0A9 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +128,7 @@
 				9552C80D2A36F4E400417339 /* AddItemView.swift */,
 				95F6E4452A3834190024D0A9 /* ImagePickerView.swift */,
 				958F44C62A3C0BB20066994B /* FavoritesView.swift */,
+				95F57DB92A4167AF00516E46 /* DBTestView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				9552C7FF2A31748100417339 /* ListItemView.swift in Sources */,
 				9552C80E2A36F4E400417339 /* AddItemView.swift in Sources */,
 				9597A0102A2F5BE70004431D /* IssueView.swift in Sources */,
+				95F57DBA2A4167AF00516E46 /* DBTestView.swift in Sources */,
 				95F6E4462A3834190024D0A9 /* ImagePickerView.swift in Sources */,
 				95B5168E2A3C159D00D04B69 /* FavoriteSampleView.swift in Sources */,
 				95979FFA2A2F4DB90004431D /* HeckDesignsApp.swift in Sources */,

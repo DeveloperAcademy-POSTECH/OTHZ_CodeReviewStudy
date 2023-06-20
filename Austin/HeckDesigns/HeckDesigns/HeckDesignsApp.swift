@@ -11,7 +11,8 @@ import SwiftUI
 struct HeckDesignsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            DBTestView()
         }
     }
 }

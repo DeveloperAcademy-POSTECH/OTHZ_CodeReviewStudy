@@ -94,7 +94,8 @@ struct AddItemView: View {
                             title: title,
                             image: selectedImage,
                             description: description,
-                            group: .Heck
+                            group: .Heck,
+                            id: 0
                         )
                     )
                 } else if selectedType == .Issue {
@@ -103,7 +104,8 @@ struct AddItemView: View {
                             title: title,
                             image: selectedImage,
                             description: description,
-                            group: .Heck
+                            group: .Heck,
+                            id: 0
                         )
                     )
                 }  else if selectedType == .Nice {
@@ -112,7 +114,8 @@ struct AddItemView: View {
                             title: title,
                             image: selectedImage,
                             description: description,
-                            group: .Heck
+                            group: .Heck,
+                            id: 0
                         )
                     )
                 }

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-//protocol HeckDesignTableProtocol {
-//    
-//    func createHeckTable()
-//    func insertHeckData(img: UIImage)
-//    func readHeckData() -> [ListItem]
-//    func readHeckDataOne() -> ListItem
-//    func deleteHeckData(id: Int)
-//}
-//
+protocol HeckDesignTableProtocol {
+    
+//    func createTable()
+//    func insertData(img: UIImage)
+//    func readData() -> [ListItem]
+//    func readDataOne() -> ListItem
+//    func deleteData(id: Int)
+}
+
