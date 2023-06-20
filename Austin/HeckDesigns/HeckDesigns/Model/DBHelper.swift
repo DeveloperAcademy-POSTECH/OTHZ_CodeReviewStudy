@@ -70,8 +70,8 @@ class DBHelper : HeckDesignTableProtocol {
            id INTEGER PRIMARY KEY AUTOINCREMENT,
            title TEXT,
            description TEXT,
-           group TEXT,
-           is_favorite INTEGER,
+           group_type TEXT,
+           is_favorite TEXT,
            image_name TEXT
            ) ;
            """
@@ -104,10 +104,10 @@ class DBHelper : HeckDesignTableProtocol {
         `id`,
         title,
         description,
-        group,
+        group_type,
         is_favorite,
         image_name
-        ) values (?, ?, ?);
+        ) values (?, ?, ?, ?, ?, ?);
         """
        var statement: OpaquePointer? = nil
        
@@ -119,7 +119,6 @@ class DBHelper : HeckDesignTableProtocol {
            sqlite3_bind_text(statement, 4, group.rawValue, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
            sqlite3_bind_int(statement, 5, Int32(isFavorite))
            sqlite3_bind_text(statement, 6, imageName, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
-
        }
        else {
            print("sqlite binding failure")
@@ -154,15 +153,15 @@ class DBHelper : HeckDesignTableProtocol {
             let description = String(cString: sqlite3_column_text(statement, 2)) // 결과의 1번째 테이블 값.
             let groupType = String(cString: sqlite3_column_text(statement, 3)) // 결과의 1번째 테이블 값.
             let isFavorite = sqlite3_column_int(statement, 4) // 결과의 2번째 테이블 값.
-            let imageName = String(cString: sqlite3_column_text(statement, 4)) // 결과의 1번째 테이블 값.
+            let imageName = String(cString: sqlite3_column_text(statement, 5)) // 결과의 1번째 테이블 값.
             
             result.append(DBModel(
                 id: id,
                 title: title,
                 description: description,
-                groupType: "Heck",
-                isFavorite: 0,
-                imageName: "heck0"
+                groupType: groupType,
+                isFavorite: isFavorite,
+                imageName: imageName
             ))
         }
         sqlite3_finalize(statement)

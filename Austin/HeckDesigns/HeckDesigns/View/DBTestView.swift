@@ -39,6 +39,7 @@ struct DBTestView: View {
             }
             Button {
                 dbHelper.dropTable(tableName: "heckTable")
+                heckList = []
             } label: {
                 Text("drop")
             }
