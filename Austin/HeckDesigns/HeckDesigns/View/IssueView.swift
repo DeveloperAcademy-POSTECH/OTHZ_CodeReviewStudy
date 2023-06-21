@@ -15,6 +15,7 @@ struct IssueView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                FavoriteSampleView(groupType: .Issue)
                 VStack {
                     ForEach($model.issueList, id: \.self) { $item in
                         NavigationLink {

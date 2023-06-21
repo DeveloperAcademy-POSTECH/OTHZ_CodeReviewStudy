@@ -11,6 +11,7 @@ import SwiftUI
 struct HeckView: View {
     @State var showAddModal = false
     @ObservedObject var model = Model.instance
+    let dbHelper = DBHelper.shared
     
     let columns = [ GridItem(.adaptive(minimum: 170)) ]
     
@@ -19,6 +20,7 @@ struct HeckView: View {
             ScrollView {
                 FavoriteSampleView(groupType: .Heck)
                 
+
                 LazyVGrid(columns: columns) {
                     ForEach($model.heckList, id: \.self) { $item in
                         NavigationLink {
