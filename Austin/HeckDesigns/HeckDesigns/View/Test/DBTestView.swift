@@ -19,6 +19,8 @@ struct DBTestView: View {
                 VStack {
                     Text(item.title)
                     Text(item.description)
+                    Text(item.group.rawValue)
+                    Image(uiImage: item.image)
                 }
             }
             Button {
