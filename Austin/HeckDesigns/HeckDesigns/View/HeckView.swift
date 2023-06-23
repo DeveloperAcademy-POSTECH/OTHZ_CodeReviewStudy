@@ -28,7 +28,7 @@ struct HeckView: View {
                         } label: {
                             VStack(alignment: .leading) {
                                 ZStack {
-                                    Image(uiImage: item.image)
+                                    Image(uiImage: item.image ?? UIImage(named: "addItemDefault")!)
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 170, height: 170)
@@ -69,6 +69,9 @@ struct HeckView: View {
             }
             .sheet(isPresented: $showAddModal) {
                 AddItemView(selectedType: .Heck)
+            }
+            .onAppear {
+                let dbdata = dbHelper.readData()
             }
         }
     }

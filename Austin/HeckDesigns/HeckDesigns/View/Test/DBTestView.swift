@@ -20,7 +20,7 @@ struct DBTestView: View {
                     Text(item.title)
                     Text(item.description)
                     Text(item.group.rawValue)
-                    Image(uiImage: item.image)
+                    Image(uiImage: item.image!)
                 }
             }
             Button {

@@ -143,7 +143,7 @@ struct ListItemView: View {
                         print("Cancel")
                         self.title = item.title
                         self.description = item.description
-                        self.image = item.image
+                        self.image = item.image ?? UIImage(named: "addItemDefault")!
                         isEdit = false
                     } label: {
                         Text("Cancel")
@@ -169,7 +169,7 @@ struct ListItemView: View {
                         print("Edit clicked")
                         self.title = item.title
                         self.description = item.description
-                        self.image = item.image
+                        self.image = item.image ?? UIImage(named: "addItemDefault")!
                         self.isEdit = true
                     } label: {
                         Text("Edit")
@@ -183,7 +183,7 @@ struct ListItemView: View {
             print("onAppear")
             self.title = item.title
             self.description = item.description
-            self.image = item.image
+            self.image = item.image ?? UIImage(named: "addItemDefault")!
             self.isFavorite = item.isFavorite
             focusField = .title
         }

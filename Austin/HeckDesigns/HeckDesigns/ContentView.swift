@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    let fileManager = ImageFileManager.shared
+    let dbHelper = DBHelper.shared
+    let model = Model.instance
     @State var selectedTab = 0
+    
     
     var body: some View {
         TabView {
@@ -28,6 +32,47 @@ struct ContentView: View {
                     Image(systemName: "questionmark.bubble.fill")
                     Text("Issue")
                 }
+        }
+        .onAppear {
+            dbHelper.createTable()
+            let dbData = dbHelper.readData()
+            dbData.map { data in
+                if data.groupType == "Heck" {
+                    model.heckList.append(
+                        ListItem(
+                            title: data.title,
+                            image: fileManager.getSavedImage(named: "\(data.imageName)"),
+                            description: data.description,
+                            group: .Heck,
+                            isFavorite: data.isFavorite == 0 ? false : true,
+                            id: Int(data.id)
+                        )
+                    )
+                } else if data.groupType == "Nice" {
+                    model.niceList.append(
+                        ListItem(
+                            title: data.title,
+                            image: fileManager.getSavedImage(named: "\(data.imageName)"),
+                            description: data.description,
+                            group: .Nice,
+                            isFavorite: data.isFavorite == 0 ? false : true,
+                            id: Int(data.id)
+                        )
+                    )
+                } else if data.groupType == "Issue" {
+                    model.issueList.append(
+                        ListItem(
+                            title: data.title,
+                            image: fileManager.getSavedImage(named: "\(data.imageName)"),
+                            description: data.description,
+                            group: .Issue,
+                            isFavorite: data.isFavorite == 0 ? false : true,
+                            id: Int(data.id)
+                        )
+                    )
+                }
+                
+            }
         }
     }
 }
