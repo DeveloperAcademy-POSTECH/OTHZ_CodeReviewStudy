@@ -136,7 +136,8 @@ extension AddItemView {
                     image: selectedImage,
                     description: description,
                     group: .Heck,
-                    id: newId
+                    id: newId,
+                    uid: String(newId)
                 )
             )
         } else if selectedType == .Issue {
@@ -146,7 +147,8 @@ extension AddItemView {
                     image: selectedImage,
                     description: description,
                     group: .Heck,
-                    id: newId
+                    id: newId,
+                    uid: String(newId)
                 )
             )
         }  else if selectedType == .Nice {
@@ -156,7 +158,8 @@ extension AddItemView {
                     image: selectedImage,
                     description: description,
                     group: .Heck,
-                    id: newId
+                    id: newId,
+                    uid: String(newId)
                 )
             )
         }
@@ -179,7 +182,9 @@ extension AddItemView {
             title: title,
             description: description,
             group: selectedType,
-            imageName: "item\(newId)")
+            imageName: "item\(newId)",
+            uid: String(newId)
+        )
     }
 }
 

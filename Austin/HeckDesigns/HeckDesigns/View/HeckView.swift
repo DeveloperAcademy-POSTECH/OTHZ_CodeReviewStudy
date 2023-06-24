@@ -19,6 +19,12 @@ struct HeckView: View {
         NavigationStack {
             ScrollView {
                 FavoriteSampleView(groupType: .Heck)
+                Button {
+                    dbHelper.dropTable(tableName: "heckTable")
+                } label: {
+                    Text("drop table")
+                }
+
                 
 
                 LazyVGrid(columns: columns) {
@@ -70,12 +76,11 @@ struct HeckView: View {
             .sheet(isPresented: $showAddModal) {
                 AddItemView(selectedType: .Heck)
             }
-            .onAppear {
-                let dbdata = dbHelper.readData()
-            }
+            
         }
     }
 }
+
 
 struct HeckView_Previews: PreviewProvider {
     static var previews: some View {

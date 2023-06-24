@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ListItemView: View {
-    @Environment(\.presentationMode) var presentationMode
+    let fileManager = ImageFileManager.shared
     let model = Model.instance
+    let dbHelper = DBHelper.shared
+    @Environment(\.presentationMode) var presentationMode
+    
     enum Field: Hashable {
         case title, description
     }
@@ -72,6 +75,7 @@ struct ListItemView: View {
                 Divider()
                 HStack {
                     Button {
+                        dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite == true ? false : true, imageName: "item\(item.uid)")
                         item.isFavorite.toggle()
                         isFavorite.toggle()
                     } label: {
@@ -130,6 +134,15 @@ struct ListItemView: View {
                     $0.id != item.id
                 }
                 isEdit = false
+                dbHelper.deleteData(uid: item.uid)
+                fileManager.deleteImage(named: "item\(item.uid)") { result in
+                    if result == true {
+                        print("delete item is success")
+                    } else {
+                        print("delete item is failed")
+                    }
+                }
+                
                 presentationMode.wrappedValue.dismiss()
                 print("deleted")
             }
@@ -158,6 +171,22 @@ struct ListItemView: View {
                         item.description = self.description
                         item.image = self.image
                         isEdit = false
+                        fileManager.deleteImage(named: "item\(item.uid)") { res in
+                            if res == true {
+                                print("delete item is successed")
+                            } else {
+                                print("delete item is failed")
+                            }
+                        }
+                        fileManager.saveImage(image: self.image, name: "item\(item.uid)", onSuccess: { res in
+                            if res == true {
+                                print("write success")
+                            } else {
+                                print("write fail")
+                            }
+                        })
+                        dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite, imageName: "item\(item.uid)")
+                        
                     } label: {
                         Text("Done")
                             .navButton()
@@ -186,6 +215,8 @@ struct ListItemView: View {
             self.image = item.image ?? UIImage(named: "addItemDefault")!
             self.isFavorite = item.isFavorite
             focusField = .title
+            print(item)
+            print(dbHelper.readData())
         }
         .sheet(isPresented: $isSelectingImage) {
             ImagePicker(selectedImage: $image)
@@ -200,7 +231,8 @@ struct ListItemViewForPrev: View {
         image: UIImage(named: "heck0")!,
         description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
         group: .Heck,
-        id: 0
+        id: 0,
+        uid: "14"
     )
     
     var body: some View {

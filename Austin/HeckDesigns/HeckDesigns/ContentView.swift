@@ -45,7 +45,8 @@ struct ContentView: View {
                             description: data.description,
                             group: .Heck,
                             isFavorite: data.isFavorite == 0 ? false : true,
-                            id: Int(data.id)
+                            id: Int(data.id),
+                            uid: data.uid
                         )
                     )
                 } else if data.groupType == "Nice" {
@@ -56,7 +57,8 @@ struct ContentView: View {
                             description: data.description,
                             group: .Nice,
                             isFavorite: data.isFavorite == 0 ? false : true,
-                            id: Int(data.id)
+                            id: Int(data.id),
+                            uid: data.uid
                         )
                     )
                 } else if data.groupType == "Issue" {
@@ -67,7 +69,8 @@ struct ContentView: View {
                             description: data.description,
                             group: .Issue,
                             isFavorite: data.isFavorite == 0 ? false : true,
-                            id: Int(data.id)
+                            id: Int(data.id),
+                            uid: data.uid
                         )
                     )
                 }

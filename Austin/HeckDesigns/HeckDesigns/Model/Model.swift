@@ -20,6 +20,7 @@ struct ListItem: Hashable {
     var group: GroupType
     var isFavorite = false
     var id: Int
+    var uid: String
 }
 
 class Model: ObservableObject {
@@ -33,7 +34,8 @@ class Model: ObservableObject {
             description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
             group: .Heck,
             isFavorite: true,
-            id: 0
+            id: 0,
+            uid: "124"
         ),
 //        ListItem(
 //            title: "아 뭘 사랑하냐고",
@@ -94,7 +96,8 @@ class Model: ObservableObject {
             description: "흰 화면을 10초동안 보는 것은 정말 마음을 어렵게 한다. 스켈레톤 UI는 1초 이상의 기다림에 대해 로딩에 대한 친절한 안내를 제공해준다.",
             group: .Nice,
             isFavorite: true,
-            id: 0
+            id: 0,
+            uid: "53151"
         ),
 //        ListItem(
 //            title: "완벽한 구매 경험",
@@ -120,7 +123,8 @@ class Model: ObservableObject {
             description: "매장용 컵에 위와 같이 매장용 컵에 대한 안내를 붙였다. 확실한 방법이긴하나 투썸과 같이 자체 컵에 프린팅을 하는 방법도 있을 것 같은데 과연 매장용 컵 표시에 대한 최선의 솔루션이었을까?",
             group: .Issue,
             isFavorite: true,
-            id: 3
+            id: 3,
+            uid: "53151"
         ),
     ]
 }
