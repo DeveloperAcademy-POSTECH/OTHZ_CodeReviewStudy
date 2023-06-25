@@ -17,11 +17,9 @@ struct ListItemView: View {
         case title, description
     }
     @Binding var item: ListItem
-    
     @State var isEdit = false
     @State var isDelete = false
     @State var isSelectingImage = false
-    
     @State var image = UIImage(named: "addItemDefault")!
     @State var title = ""
     @State var description = ""
@@ -75,9 +73,7 @@ struct ListItemView: View {
                 Divider()
                 HStack {
                     Button {
-                        dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite == true ? false : true, imageName: "item\(item.uid)")
-                        item.isFavorite.toggle()
-                        isFavorite.toggle()
+                        toggleIsFavorite()
                     } label: {
                         if isFavorite == true {
                             Image(systemName: "star.fill")
@@ -89,7 +85,6 @@ struct ListItemView: View {
                                 .foregroundColor(Color.textBlack)
                         }
                     }
-
 
                     Spacer()
                 }
@@ -130,30 +125,14 @@ struct ListItemView: View {
                 self.isDelete = false
             }
             Button("삭제", role: .destructive) {
-                model.heckList = model.heckList.filter {
-                    $0.id != item.id
-                }
-                isEdit = false
-                dbHelper.deleteData(uid: item.uid)
-                fileManager.deleteImage(named: "item\(item.uid)") { result in
-                    if result == true {
-                        print("delete item is success")
-                    } else {
-                        print("delete item is failed")
-                    }
-                }
-                
-                presentationMode.wrappedValue.dismiss()
-                print("deleted")
+                deleteItem()
             }
-
         
         }
         .toolbar {
             if isEdit == true {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        print("Cancel")
                         self.title = item.title
                         self.description = item.description
                         self.image = item.image ?? UIImage(named: "addItemDefault")!
@@ -166,27 +145,7 @@ struct ListItemView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("Done")
-                        item.title = self.title
-                        item.description = self.description
-                        item.image = self.image
-                        isEdit = false
-                        fileManager.deleteImage(named: "item\(item.uid)") { res in
-                            if res == true {
-                                print("delete item is successed")
-                            } else {
-                                print("delete item is failed")
-                            }
-                        }
-                        fileManager.saveImage(image: self.image, name: "item\(item.uid)", onSuccess: { res in
-                            if res == true {
-                                print("write success")
-                            } else {
-                                print("write fail")
-                            }
-                        })
-                        dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite, imageName: "item\(item.uid)")
-                        
+                        updateItem()
                     } label: {
                         Text("Done")
                             .navButton()
@@ -195,7 +154,6 @@ struct ListItemView: View {
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("Edit clicked")
                         self.title = item.title
                         self.description = item.description
                         self.image = item.image ?? UIImage(named: "addItemDefault")!
@@ -209,14 +167,12 @@ struct ListItemView: View {
             }
         }
         .onAppear {
-            print("onAppear")
+        
             self.title = item.title
             self.description = item.description
             self.image = item.image ?? UIImage(named: "addItemDefault")!
             self.isFavorite = item.isFavorite
             focusField = .title
-            print(item)
-            print(dbHelper.readData())
         }
         .sheet(isPresented: $isSelectingImage) {
             ImagePicker(selectedImage: $image)
@@ -224,6 +180,37 @@ struct ListItemView: View {
         
     }
 }
+
+extension ListItemView {
+    func toggleIsFavorite(){
+        dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite == true ? false : true, imageName: "item\(item.uid)")
+        item.isFavorite.toggle()
+        isFavorite.toggle()
+    }
+    func deleteItem(){
+        model.heckList = model.heckList.filter {
+            $0.id != item.id
+        }
+        isEdit = false
+        dbHelper.deleteData(id: item.id)
+        fileManager.deleteImage(named: "item\(item.uid)") { _ in
+        }
+        
+        presentationMode.wrappedValue.dismiss()
+    }
+    func updateItem(){
+        item.title = self.title
+        item.description = self.description
+        item.image = self.image
+        isEdit = false
+        fileManager.deleteImage(named: "item\(item.uid)") { _ in
+        }
+        fileManager.saveImage(image: self.image, name: "item\(item.uid)", onSuccess: { _ in
+        })
+        dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite, imageName: "item\(item.uid)")
+    }
+}
+
 
 struct ListItemViewForPrev: View {
     @State var item = ListItem(

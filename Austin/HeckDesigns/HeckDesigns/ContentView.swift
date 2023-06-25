@@ -36,7 +36,7 @@ struct ContentView: View {
         .onAppear {
             dbHelper.createTable()
             let dbData = dbHelper.readData()
-            dbData.map { data in
+            dbData.forEach { data in
                 if data.groupType == "Heck" {
                     model.heckList.append(
                         ListItem(

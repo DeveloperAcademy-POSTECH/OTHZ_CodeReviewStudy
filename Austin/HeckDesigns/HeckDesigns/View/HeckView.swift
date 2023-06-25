@@ -25,8 +25,6 @@ struct HeckView: View {
                     Text("drop table")
                 }
 
-                
-
                 LazyVGrid(columns: columns) {
                     ForEach($model.heckList, id: \.self) { $item in
                         NavigationLink {

@@ -209,8 +209,8 @@ class DBHelper : HeckDesignTableProtocol {
     }
     
     //id 값에 따라 삭제
-    func deleteData(uid: String) {
-            let queryString = "DELETE from heckTable where uid == \(uid)"
+    func deleteData(id: Int) {
+            let queryString = "DELETE from heckTable WHERE id == \(id);"
             var statement: OpaquePointer?
             
             if sqlite3_prepare(db, queryString, -1, &statement, nil) != SQLITE_OK {
