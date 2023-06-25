@@ -19,7 +19,11 @@ struct HeckView: View {
         NavigationStack {
             ScrollView {
                 FavoriteSampleView(groupType: .Heck)
-                
+                Button {
+                    dbHelper.dropTable(tableName: "heckTable")
+                } label: {
+                    Text("drop table")
+                }
 
                 LazyVGrid(columns: columns) {
                     ForEach($model.heckList, id: \.self) { $item in
@@ -28,7 +32,7 @@ struct HeckView: View {
                         } label: {
                             VStack(alignment: .leading) {
                                 ZStack {
-                                    Image(uiImage: item.image)
+                                    Image(uiImage: item.image ?? UIImage(named: "addItemDefault")!)
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 170, height: 170)
@@ -70,9 +74,11 @@ struct HeckView: View {
             .sheet(isPresented: $showAddModal) {
                 AddItemView(selectedType: .Heck)
             }
+            
         }
     }
 }
+
 
 struct HeckView_Previews: PreviewProvider {
     static var previews: some View {

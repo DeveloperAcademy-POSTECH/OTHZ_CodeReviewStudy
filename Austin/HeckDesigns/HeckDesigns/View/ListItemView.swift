@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ListItemView: View {
-    @Environment(\.presentationMode) var presentationMode
+    let fileManager = ImageFileManager.shared
     let model = Model.instance
+    let dbHelper = DBHelper.shared
+    @Environment(\.presentationMode) var presentationMode
+    
     enum Field: Hashable {
         case title, description
     }
     @Binding var item: ListItem
-    
     @State var isEdit = false
     @State var isDelete = false
     @State var isSelectingImage = false
-    
     @State var image = UIImage(named: "addItemDefault")!
     @State var title = ""
     @State var description = ""
@@ -72,8 +73,7 @@ struct ListItemView: View {
                 Divider()
                 HStack {
                     Button {
-                        item.isFavorite.toggle()
-                        isFavorite.toggle()
+                        toggleIsFavorite()
                     } label: {
                         if isFavorite == true {
                             Image(systemName: "star.fill")
@@ -85,7 +85,6 @@ struct ListItemView: View {
                                 .foregroundColor(Color.textBlack)
                         }
                     }
-
 
                     Spacer()
                 }
@@ -126,24 +125,17 @@ struct ListItemView: View {
                 self.isDelete = false
             }
             Button("삭제", role: .destructive) {
-                model.heckList = model.heckList.filter {
-                    $0.id != item.id
-                }
-                isEdit = false
-                presentationMode.wrappedValue.dismiss()
-                print("deleted")
+                deleteItem()
             }
-
         
         }
         .toolbar {
             if isEdit == true {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        print("Cancel")
                         self.title = item.title
                         self.description = item.description
-                        self.image = item.image
+                        self.image = item.image ?? UIImage(named: "addItemDefault")!
                         isEdit = false
                     } label: {
                         Text("Cancel")
@@ -153,11 +145,7 @@ struct ListItemView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("Done")
-                        item.title = self.title
-                        item.description = self.description
-                        item.image = self.image
-                        isEdit = false
+                        updateItem()
                     } label: {
                         Text("Done")
                             .navButton()
@@ -166,10 +154,9 @@ struct ListItemView: View {
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("Edit clicked")
                         self.title = item.title
                         self.description = item.description
-                        self.image = item.image
+                        self.image = item.image ?? UIImage(named: "addItemDefault")!
                         self.isEdit = true
                     } label: {
                         Text("Edit")
@@ -180,10 +167,10 @@ struct ListItemView: View {
             }
         }
         .onAppear {
-            print("onAppear")
+        
             self.title = item.title
             self.description = item.description
-            self.image = item.image
+            self.image = item.image ?? UIImage(named: "addItemDefault")!
             self.isFavorite = item.isFavorite
             focusField = .title
         }
@@ -194,13 +181,45 @@ struct ListItemView: View {
     }
 }
 
+extension ListItemView {
+    func toggleIsFavorite(){
+        dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite == true ? false : true, imageName: "item\(item.uid)")
+        item.isFavorite.toggle()
+        isFavorite.toggle()
+    }
+    func deleteItem(){
+        model.heckList = model.heckList.filter {
+            $0.id != item.id
+        }
+        isEdit = false
+        dbHelper.deleteData(id: item.id)
+        fileManager.deleteImage(named: "item\(item.uid)") { _ in
+        }
+        
+        presentationMode.wrappedValue.dismiss()
+    }
+    func updateItem(){
+        item.title = self.title
+        item.description = self.description
+        item.image = self.image
+        isEdit = false
+        fileManager.deleteImage(named: "item\(item.uid)") { _ in
+        }
+        fileManager.saveImage(image: self.image, name: "item\(item.uid)", onSuccess: { _ in
+        })
+        dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite, imageName: "item\(item.uid)")
+    }
+}
+
+
 struct ListItemViewForPrev: View {
     @State var item = ListItem(
         title: "감성과 안전사이",
         image: UIImage(named: "heck0")!,
         description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
         group: .Heck,
-        id: 0
+        id: 0,
+        uid: "14"
     )
     
     var body: some View {

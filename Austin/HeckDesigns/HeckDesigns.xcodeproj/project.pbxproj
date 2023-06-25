@@ -27,6 +27,8 @@
 		95A5F8542A40476A00F781FB /* HeckDesignTableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A5F8532A40476A00F781FB /* HeckDesignTableProtocol.swift */; };
 		95B5168E2A3C159D00D04B69 /* FavoriteSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */; };
 		95F57DBA2A4167AF00516E46 /* DBTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F57DB92A4167AF00516E46 /* DBTestView.swift */; };
+		95F57DBD2A42C48000516E46 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F57DBC2A42C48000516E46 /* ImageFileManager.swift */; };
+		95F57DBF2A42C5CF00516E46 /* ImageSaveTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F57DBE2A42C5CF00516E46 /* ImageSaveTestView.swift */; };
 		95F6E4462A3834190024D0A9 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6E4452A3834190024D0A9 /* ImagePickerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		95A5F8532A40476A00F781FB /* HeckDesignTableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeckDesignTableProtocol.swift; sourceTree = "<group>"; };
 		95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSampleView.swift; sourceTree = "<group>"; };
 		95F57DB92A4167AF00516E46 /* DBTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTestView.swift; sourceTree = "<group>"; };
+		95F57DBC2A42C48000516E46 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
+		95F57DBE2A42C5CF00516E46 /* ImageSaveTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveTestView.swift; sourceTree = "<group>"; };
 		95F6E4452A3834190024D0A9 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +98,7 @@
 		95979FF82A2F4DB90004431D /* HeckDesigns */ = {
 			isa = PBXGroup;
 			children = (
+				95F57DBB2A42C46D00516E46 /* Helper */,
 				95A5F8522A40474700F781FB /* Protocol */,
 				9597A0092A2F50920004431D /* Model */,
 				9597A00A2A2F509D0004431D /* ViewModel */,
@@ -128,7 +133,7 @@
 				9552C80D2A36F4E400417339 /* AddItemView.swift */,
 				95F6E4452A3834190024D0A9 /* ImagePickerView.swift */,
 				958F44C62A3C0BB20066994B /* FavoritesView.swift */,
-				95F57DB92A4167AF00516E46 /* DBTestView.swift */,
+				95F57DC02A42C5F800516E46 /* Test */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -172,6 +177,23 @@
 				95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		95F57DBB2A42C46D00516E46 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				95F57DBC2A42C48000516E46 /* ImageFileManager.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		95F57DC02A42C5F800516E46 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				95F57DB92A4167AF00516E46 /* DBTestView.swift */,
+				95F57DBE2A42C5CF00516E46 /* ImageSaveTestView.swift */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,9 +278,11 @@
 				9552C80E2A36F4E400417339 /* AddItemView.swift in Sources */,
 				9597A0102A2F5BE70004431D /* IssueView.swift in Sources */,
 				95F57DBA2A4167AF00516E46 /* DBTestView.swift in Sources */,
+				95F57DBD2A42C48000516E46 /* ImageFileManager.swift in Sources */,
 				95F6E4462A3834190024D0A9 /* ImagePickerView.swift in Sources */,
 				95B5168E2A3C159D00D04B69 /* FavoriteSampleView.swift in Sources */,
 				95979FFA2A2F4DB90004431D /* HeckDesignsApp.swift in Sources */,
+				95F57DBF2A42C5CF00516E46 /* ImageSaveTestView.swift in Sources */,
 				95A5F8542A40476A00F781FB /* HeckDesignTableProtocol.swift in Sources */,
 				9552C80C2A3604DC00417339 /* ColorExtension.swift in Sources */,
 				9597A00E2A2F5BDF0004431D /* NiceView.swift in Sources */,

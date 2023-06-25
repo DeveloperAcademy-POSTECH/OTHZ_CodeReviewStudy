@@ -15,6 +15,7 @@ struct DBModel: Codable, Hashable {
     var groupType: String
     var isFavorite: Int32
     var imageName: String
+    var uid: String
 }
 
 
@@ -72,7 +73,8 @@ class DBHelper : HeckDesignTableProtocol {
            description TEXT,
            group_type TEXT,
            is_favorite TEXT,
-           image_name TEXT
+           image_name TEXT,
+           uid TEXT
            ) ;
            """
 //        `isF` INTEGER NOT NULL,
@@ -97,7 +99,7 @@ class DBHelper : HeckDesignTableProtocol {
         sqlite3_finalize(statement) // 메모리에서 sqlite3 할당 해제.
     }
     
-    func insertData(title: String, description: String, isFavorite: Int = 0,group: GroupType, imageName: String) {
+    func insertData(title: String, description: String, isFavorite: Int = 0,group: GroupType, imageName: String, uid: String) {
        // id 는 Auto increment 속성을 갖고 있기에 빼줌.
        let insertQuery = """
         insert into heckTable (
@@ -106,8 +108,9 @@ class DBHelper : HeckDesignTableProtocol {
         description,
         group_type,
         is_favorite,
-        image_name
-        ) values (?, ?, ?, ?, ?, ?);
+        image_name,
+        uid
+        ) values (?, ?, ?, ?, ?, ?, ?);
         """
        var statement: OpaquePointer? = nil
        
@@ -119,6 +122,7 @@ class DBHelper : HeckDesignTableProtocol {
            sqlite3_bind_text(statement, 4, group.rawValue, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
            sqlite3_bind_int(statement, 5, Int32(isFavorite))
            sqlite3_bind_text(statement, 6, imageName, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
+           sqlite3_bind_text(statement, 7, uid, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
        }
        else {
            print("sqlite binding failure")
@@ -154,6 +158,7 @@ class DBHelper : HeckDesignTableProtocol {
             let groupType = String(cString: sqlite3_column_text(statement, 3)) // 결과의 1번째 테이블 값.
             let isFavorite = sqlite3_column_int(statement, 4) // 결과의 2번째 테이블 값.
             let imageName = String(cString: sqlite3_column_text(statement, 5)) // 결과의 1번째 테이블 값.
+            let uid = String(cString: sqlite3_column_text(statement, 6))
             
             result.append(DBModel(
                 id: id,
@@ -161,7 +166,8 @@ class DBHelper : HeckDesignTableProtocol {
                 description: description,
                 groupType: groupType,
                 isFavorite: isFavorite,
-                imageName: imageName
+                imageName: imageName,
+                uid: uid
             ))
         }
         sqlite3_finalize(statement)
@@ -183,9 +189,9 @@ class DBHelper : HeckDesignTableProtocol {
         let queryString = """
             UPDATE heckTable SET title = '\(title)',
             description = '\(description)',
-            groupType = '\(groupType.rawValue)',
-            isFavorite = \(isFavorite == true ? 0 : 1),
-            imageName = '\(imageName)' WHERE id == \(id)
+            group_type = '\(groupType.rawValue)',
+            is_favorite = \(isFavorite == true ? 1 : 0),
+            image_name = '\(imageName)' WHERE id == \(id)
         """
         
         // 쿼리 준비.
@@ -204,13 +210,15 @@ class DBHelper : HeckDesignTableProtocol {
     
     //id 값에 따라 삭제
     func deleteData(id: Int) {
-            let queryString = "DELETE FROM heckTable WHERE id == \(id)"
+            let queryString = "DELETE from heckTable WHERE id == \(id);"
             var statement: OpaquePointer?
             
             if sqlite3_prepare(db, queryString, -1, &statement, nil) != SQLITE_OK {
                 onSQLErrorPrintErrorMessage(db)
                 return
             }
+            
+
             
             // 쿼리 실행.
             if sqlite3_step(statement) != SQLITE_DONE {

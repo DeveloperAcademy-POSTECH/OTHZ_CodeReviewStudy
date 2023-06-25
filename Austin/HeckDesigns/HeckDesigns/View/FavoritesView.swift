@@ -23,7 +23,7 @@ struct FavoritesView: View {
                             ListItemView(item: $item)
                         } label: {
                             VStack(alignment: .leading) {
-                                Image(uiImage: item.image)
+                                Image(uiImage: item.image ?? UIImage(named: "addItemDefault")!)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 170, height: 170)
