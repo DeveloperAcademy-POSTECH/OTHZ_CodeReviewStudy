@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @ObservedObject var model = Model.instance
+    @ObservedObject var listModel = ListModel.shared
     var groupType: GroupType = .Heck
     let columns = [ GridItem(.adaptive(minimum: 170)) ]
-    @State var gridList = Model.instance.heckList
+    @State var gridList = ListModel.shared.heckList
     
     var body: some View {
         ScrollView {
@@ -39,11 +39,11 @@ struct FavoritesView: View {
         }
         .onAppear {
             if groupType == .Heck {
-                gridList = model.heckList
+                gridList = ListModel.shared.heckList
             } else if groupType == .Issue {
-                gridList = model.issueList
+                gridList = ListModel.shared.issueList
             } else if groupType == .Nice {
-                gridList = model.niceList
+                gridList = ListModel.shared.niceList
             }
         }
         .navigationTitle("Favorites")

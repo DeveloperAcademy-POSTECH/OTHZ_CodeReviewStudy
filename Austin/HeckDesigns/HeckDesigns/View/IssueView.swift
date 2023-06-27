@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IssueView: View {
     @State var showAddModal = false
-    @ObservedObject var model = Model.instance
+    @ObservedObject var listModel = ListModel.shared
 //    let columns = [GridItem(.adaptive(minimum: 170))]
     
     var body: some View {
@@ -17,7 +17,7 @@ struct IssueView: View {
             ScrollView {
                 FavoriteSampleView(groupType: .Issue)
                 VStack {
-                    ForEach($model.issueList, id: \.self) { $item in
+                    ForEach($listModel.issueList, id: \.self) { $item in
                         NavigationLink {
                             ListItemView(item: $item)
                         } label: {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoriteSampleView: View {
     var groupType: GroupType = .Heck
-    @State var scrollList = Model.instance.heckList
+    @State var scrollList = ListModel.shared.heckList
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -55,11 +55,11 @@ struct FavoriteSampleView: View {
         }
         .onAppear {
             if groupType == .Heck {
-                scrollList = Model.instance.heckList
+                scrollList = ListModel.shared.heckList
             } else if groupType == .Nice {
-                scrollList = Model.instance.niceList
+                scrollList = ListModel.shared.niceList
             } else if groupType == .Issue {
-                scrollList = Model.instance.issueList
+                scrollList = ListModel.shared.issueList
             }
         }
         .padding()
@@ -71,3 +71,4 @@ struct FavoriteSampleView_Previews: PreviewProvider {
         FavoriteSampleView()
     }
 }
+

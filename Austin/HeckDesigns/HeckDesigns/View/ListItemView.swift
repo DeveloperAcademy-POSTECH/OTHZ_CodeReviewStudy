@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListItemView: View {
     let fileManager = ImageFileManager.shared
-    let model = Model.instance
+    let listModel = ListModel.shared
     let dbHelper = DBHelper.shared
     @Environment(\.presentationMode) var presentationMode
     
@@ -188,7 +188,7 @@ extension ListItemView {
         isFavorite.toggle()
     }
     func deleteItem(){
-        model.heckList = model.heckList.filter {
+        listModel.heckList = listModel.heckList.filter {
             $0.id != item.id
         }
         isEdit = false

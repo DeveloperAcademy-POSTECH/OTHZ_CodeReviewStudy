@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DBTestView: View {
     @State var showAddModal = false
-    @ObservedObject var model = Model.instance
+    @ObservedObject var model = ListModel.shared
     @State var heckList: [ListItem] = []
     let dbHelper = DBHelper.shared
     

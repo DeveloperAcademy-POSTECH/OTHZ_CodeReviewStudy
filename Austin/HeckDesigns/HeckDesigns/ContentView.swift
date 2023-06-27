@@ -16,7 +16,6 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            
             HeckView()
                 .tabItem {
                     Image(systemName: "exclamationmark.bubble.fill")
@@ -44,7 +43,7 @@ struct ContentView: View {
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
                             group: .Heck,
-                            isFavorite: data.isFavorite == 0 ? false : true,
+                            isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid
                         )
@@ -56,7 +55,7 @@ struct ContentView: View {
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
                             group: .Nice,
-                            isFavorite: data.isFavorite == 0 ? false : true,
+                            isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid
                         )
@@ -68,7 +67,7 @@ struct ContentView: View {
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
                             group: .Issue,
-                            isFavorite: data.isFavorite == 0 ? false : true,
+                            isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid
                         )

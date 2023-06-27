@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NiceView: View {
     @State var showAddModal = false
-    @ObservedObject var model = Model.instance
+    @ObservedObject var listModel = ListModel.shared
     
     let columns = [
             GridItem(.adaptive(minimum: 170))
@@ -21,7 +21,7 @@ struct NiceView: View {
                 FavoriteSampleView(groupType: .Nice)
                 
                 LazyVGrid(columns: columns) {
-                    ForEach($model.niceList, id: \.self) { $item in
+                    ForEach($listModel.niceList, id: \.self) { $item in
                         NavigationLink {
                             ListItemView(item: $item)
                         } label: {

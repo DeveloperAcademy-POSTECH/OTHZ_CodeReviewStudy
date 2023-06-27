@@ -13,7 +13,7 @@ struct DBModel: Codable, Hashable {
     var title: String
     var description: String
     var groupType: String
-    var isFavorite: Int32
+    var isFavorite: Bool
     var imageName: String
     var uid: String
 }
@@ -88,7 +88,7 @@ class DBHelper : HeckDesignTableProtocol {
     }
     
     /// 새로운 ListItem 추가
-    func insertData(title: String, description: String, isFavorite: Int = 0,group: GroupType, imageName: String, uid: String) {
+    func insertData(title: String, description: String, isFavorite: Bool = false,group: GroupType, imageName: String, uid: String) {
        let insertQuery = """
         insert into heckTable (
         `id`,
@@ -106,7 +106,7 @@ class DBHelper : HeckDesignTableProtocol {
            sqlite3_bind_text(statement, 2, title, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
            sqlite3_bind_text(statement, 3, description, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
            sqlite3_bind_text(statement, 4, group.rawValue, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
-           sqlite3_bind_int(statement, 5, Int32(isFavorite))
+           sqlite3_bind_int(statement, 5, Int32(isFavorite ? 1 : 0))
            sqlite3_bind_text(statement, 6, imageName, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
            sqlite3_bind_text(statement, 7, uid, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
        }
@@ -148,7 +148,7 @@ class DBHelper : HeckDesignTableProtocol {
                 title: title,
                 description: description,
                 groupType: groupType,
-                isFavorite: isFavorite,
+                isFavorite: !(isFavorite == 0),
                 imageName: imageName,
                 uid: uid
             ))
@@ -172,7 +172,7 @@ class DBHelper : HeckDesignTableProtocol {
             UPDATE heckTable SET title = '\(title)',
             description = '\(description)',
             group_type = '\(groupType.rawValue)',
-            is_favorite = \(isFavorite == true ? 1 : 0),
+            is_favorite = \(isFavorite ? 1 : 0),
             image_name = '\(imageName)' WHERE id == \(id)
         """
         

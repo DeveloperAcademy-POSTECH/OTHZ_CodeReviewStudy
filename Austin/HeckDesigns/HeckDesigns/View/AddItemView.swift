@@ -11,7 +11,7 @@ struct AddItemView: View {
     let fileManager = ImageFileManager.shared
     let dbHelper = DBHelper.shared
     var groupTypes: [GroupType] = [.Heck, .Nice, .Issue]
-    var model = Model.instance
+    var listModel = ListModel.shared
     
     @Environment(\.presentationMode) var presentationMode
     @State var title = ""
@@ -116,7 +116,7 @@ struct AddItemView: View {
                 ImagePicker(selectedImage: $selectedImage)
             }
             .onAppear {
-                newId = model.heckList.count + model.niceList.count + model.issueList.count + 1
+                newId = listModel.heckList.count + listModel.niceList.count + listModel.issueList.count + 1
             }
         }
     }
@@ -130,7 +130,7 @@ extension AddItemView {
                            group: GroupType,
                            id: Int) {
         if selectedType == .Heck {
-            model.heckList.append(
+            listModel.heckList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
@@ -141,7 +141,7 @@ extension AddItemView {
                 )
             )
         } else if selectedType == .Issue {
-            model.issueList.append(
+            listModel.issueList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
@@ -152,7 +152,7 @@ extension AddItemView {
                 )
             )
         }  else if selectedType == .Nice {
-            model.niceList.append(
+            listModel.niceList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
