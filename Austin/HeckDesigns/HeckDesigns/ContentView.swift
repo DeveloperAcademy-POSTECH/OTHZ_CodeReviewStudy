@@ -36,13 +36,14 @@ struct ContentView: View {
             dbHelper.createTable()
             let dbData = dbHelper.readData()
             dbData.forEach { data in
+                
                 if data.groupType == "Heck" {
                     listModel.heckList.append(
                         ListItem(
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
-                            group: .Heck,
+                            group: .heck,
                             isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid
@@ -54,7 +55,7 @@ struct ContentView: View {
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
-                            group: .Nice,
+                            group: .nice,
                             isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid
@@ -66,7 +67,7 @@ struct ContentView: View {
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
-                            group: .Issue,
+                            group: .issue,
                             isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid

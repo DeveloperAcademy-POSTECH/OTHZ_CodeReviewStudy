@@ -217,7 +217,7 @@ struct ListItemViewForPrev: View {
         title: "감성과 안전사이",
         image: UIImage(named: "heck0")!,
         description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
-        group: .Heck,
+        group: .heck,
         id: 0,
         uid: "14"
     )

@@ -10,13 +10,13 @@ import SwiftUI
 struct AddItemView: View {
     let fileManager = ImageFileManager.shared
     let dbHelper = DBHelper.shared
-    var groupTypes: [GroupType] = [.Heck, .Nice, .Issue]
+    var groupTypes: [GroupType] = [.heck, .nice, .issue]
     var listModel = ListModel.shared
     
     @Environment(\.presentationMode) var presentationMode
     @State var title = ""
     @State var description = ""
-    @State var selectedType: GroupType = .Heck
+    @State var selectedType: GroupType = .heck
     @State var selectedImage = UIImage(named: "addItemDefault")!
     @State var isSelecting = false
     @State var isLoading = false
@@ -129,35 +129,35 @@ extension AddItemView {
                            description: String,
                            group: GroupType,
                            id: Int) {
-        if selectedType == .Heck {
+        if selectedType == .heck {
             listModel.heckList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
                     description: description,
-                    group: .Heck,
+                    group: .heck,
                     id: newId,
                     uid: String(newId)
                 )
             )
-        } else if selectedType == .Issue {
+        } else if selectedType == .issue {
             listModel.issueList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
                     description: description,
-                    group: .Heck,
+                    group: .heck,
                     id: newId,
                     uid: String(newId)
                 )
             )
-        }  else if selectedType == .Nice {
+        }  else if selectedType == .nice {
             listModel.niceList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
                     description: description,
-                    group: .Heck,
+                    group: .heck,
                     id: newId,
                     uid: String(newId)
                 )

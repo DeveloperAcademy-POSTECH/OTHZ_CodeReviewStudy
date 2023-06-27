@@ -18,7 +18,7 @@ struct NiceView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                FavoriteSampleView(groupType: .Nice)
+                FavoriteSampleView(groupType: .nice)
                 
                 LazyVGrid(columns: columns) {
                     ForEach($listModel.niceList, id: \.self) { $item in
@@ -66,7 +66,7 @@ struct NiceView: View {
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView(selectedType: .Nice)
+                AddItemView(selectedType: .nice)
             }
             .navigationTitle("Nice")
         }

@@ -8,9 +8,22 @@
 import SwiftUI
 
 enum GroupType: String {
-    case Heck
-    case Nice
-    case Issue
+    case heck
+    case nice
+    case issue
+    
+    var groupName: String {
+        self.rawValue.capitalized
+    }
+    func changeStringToGroupType(beChanged: String) -> GroupType {
+        if beChanged == "heck" {
+            return .heck
+        } else if beChanged == "nice" {
+            return .nice
+        } else {
+            return .issue
+        }
+    }
 }
 
 struct ListItem: Hashable {
@@ -32,7 +45,7 @@ class ListModel: ObservableObject {
             title: "감성과 안전사이",
             image: UIImage(named: "heck0")!,
             description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
-            group: .Heck,
+            group: .heck,
             isFavorite: true,
             id: 0,
             uid: "124"
@@ -94,7 +107,7 @@ class ListModel: ObservableObject {
             title: "다정한 기다림",
             image: UIImage(named: "nice0")!,
             description: "흰 화면을 10초동안 보는 것은 정말 마음을 어렵게 한다. 스켈레톤 UI는 1초 이상의 기다림에 대해 로딩에 대한 친절한 안내를 제공해준다.",
-            group: .Nice,
+            group: .nice,
             isFavorite: true,
             id: 0,
             uid: "53151"
@@ -121,10 +134,26 @@ class ListModel: ObservableObject {
             title: "베라 매장용 컵",
             image: UIImage(named: "issue0")!,
             description: "매장용 컵에 위와 같이 매장용 컵에 대한 안내를 붙였다. 확실한 방법이긴하나 투썸과 같이 자체 컵에 프린팅을 하는 방법도 있을 것 같은데 과연 매장용 컵 표시에 대한 최선의 솔루션이었을까?",
-            group: .Issue,
+            group: .issue,
             isFavorite: true,
             id: 3,
             uid: "53151"
         ),
     ]
+}
+
+enum Gender {
+    case male
+    case female
+}
+
+struct Person {
+    var name: String
+    var age: Int
+    var gender: Gender
+    init(name: String, age: Int, gender: Gender) {
+        self.name = name
+        self.age = age
+        self.gender = gender
+    }
 }

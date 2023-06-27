@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoritesView: View {
     @ObservedObject var listModel = ListModel.shared
-    var groupType: GroupType = .Heck
+    var groupType: GroupType = .heck
     let columns = [ GridItem(.adaptive(minimum: 170)) ]
     @State var gridList = ListModel.shared.heckList
     
@@ -38,11 +38,11 @@ struct FavoritesView: View {
             }
         }
         .onAppear {
-            if groupType == .Heck {
+            if groupType == .heck {
                 gridList = ListModel.shared.heckList
-            } else if groupType == .Issue {
+            } else if groupType == .issue {
                 gridList = ListModel.shared.issueList
-            } else if groupType == .Nice {
+            } else if groupType == .nice {
                 gridList = ListModel.shared.niceList
             }
         }

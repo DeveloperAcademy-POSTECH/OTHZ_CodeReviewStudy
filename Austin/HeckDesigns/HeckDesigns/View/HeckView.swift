@@ -18,7 +18,7 @@ struct HeckView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                FavoriteSampleView(groupType: .Heck)
+                FavoriteSampleView(groupType: .heck)
                 Button {
                     dbHelper.dropTable(tableName: "heckTable")
                 } label: {
@@ -72,7 +72,7 @@ struct HeckView: View {
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView(selectedType: .Heck)
+                AddItemView(selectedType: .heck)
             }
             
         }

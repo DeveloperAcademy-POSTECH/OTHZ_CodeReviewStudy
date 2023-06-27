@@ -15,7 +15,7 @@ struct IssueView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                FavoriteSampleView(groupType: .Issue)
+                FavoriteSampleView(groupType: .issue)
                 VStack {
                     ForEach($listModel.issueList, id: \.self) { $item in
                         NavigationLink {
@@ -57,7 +57,7 @@ struct IssueView: View {
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView(selectedType: .Issue)
+                AddItemView(selectedType: .issue)
             }
             .navigationTitle("Issue")
         }

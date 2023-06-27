@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FavoriteSampleView: View {
-    var groupType: GroupType = .Heck
+    var groupType: GroupType = .heck
     @State var scrollList = ListModel.shared.heckList
     var body: some View {
         VStack {
@@ -54,11 +54,11 @@ struct FavoriteSampleView: View {
             
         }
         .onAppear {
-            if groupType == .Heck {
+            if groupType == .heck {
                 scrollList = ListModel.shared.heckList
-            } else if groupType == .Nice {
+            } else if groupType == .nice {
                 scrollList = ListModel.shared.niceList
-            } else if groupType == .Issue {
+            } else if groupType == .issue {
                 scrollList = ListModel.shared.issueList
             }
         }
