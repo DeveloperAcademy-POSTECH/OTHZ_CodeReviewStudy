@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    let fileManager = ImageFileManager.shared
-    let dbHelper = DBHelper.shared
-    let model = Model.instance
+    private let fileManager = ImageFileManager.shared
+    private let dbHelper = DBHelper.shared
+    private let listModel = ListModel.shared
     @State var selectedTab = 0
     
     
@@ -38,7 +38,7 @@ struct ContentView: View {
             let dbData = dbHelper.readData()
             dbData.forEach { data in
                 if data.groupType == "Heck" {
-                    model.heckList.append(
+                    listModel.heckList.append(
                         ListItem(
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
@@ -50,7 +50,7 @@ struct ContentView: View {
                         )
                     )
                 } else if data.groupType == "Nice" {
-                    model.niceList.append(
+                    listModel.niceList.append(
                         ListItem(
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
@@ -62,7 +62,7 @@ struct ContentView: View {
                         )
                     )
                 } else if data.groupType == "Issue" {
-                    model.issueList.append(
+                    listModel.issueList.append(
                         ListItem(
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),

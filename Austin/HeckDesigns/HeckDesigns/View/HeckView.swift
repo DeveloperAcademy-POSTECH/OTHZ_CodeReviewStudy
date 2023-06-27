@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HeckView: View {
     @State var showAddModal = false
-    @ObservedObject var model = Model.instance
+    @ObservedObject var model = ListModel.shared
     let dbHelper = DBHelper.shared
     
     let columns = [ GridItem(.adaptive(minimum: 170)) ]

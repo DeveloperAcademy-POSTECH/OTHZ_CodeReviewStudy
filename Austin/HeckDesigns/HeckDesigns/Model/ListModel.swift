@@ -23,8 +23,8 @@ struct ListItem: Hashable {
     var uid: String
 }
 
-class Model: ObservableObject {
-    static let instance = Model()
+class ListModel: ObservableObject {
+    static let shared = ListModel()
     private init(){}
     
     @Published var heckList = [
