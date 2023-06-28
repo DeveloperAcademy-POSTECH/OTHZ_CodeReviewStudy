@@ -36,8 +36,8 @@ struct ContentView: View {
             dbHelper.createTable()
             let dbData = dbHelper.readData()
             dbData.forEach { data in
-                
-                if data.groupType == "Heck" {
+                switch data.groupType {
+                case "heck":
                     listModel.heckList.append(
                         ListItem(
                             title: data.title,
@@ -49,7 +49,7 @@ struct ContentView: View {
                             uid: data.uid
                         )
                     )
-                } else if data.groupType == "Nice" {
+                case "nice":
                     listModel.niceList.append(
                         ListItem(
                             title: data.title,
@@ -61,7 +61,7 @@ struct ContentView: View {
                             uid: data.uid
                         )
                     )
-                } else if data.groupType == "Issue" {
+                case "issue":
                     listModel.issueList.append(
                         ListItem(
                             title: data.title,
@@ -73,8 +73,9 @@ struct ContentView: View {
                             uid: data.uid
                         )
                     )
+                default:
+                    print("")
                 }
-                
             }
         }
     }

@@ -12,8 +12,6 @@ struct HeckDesignsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-//            DBTestView()
-//            ImageSaveTestView()
         }
     }
 }

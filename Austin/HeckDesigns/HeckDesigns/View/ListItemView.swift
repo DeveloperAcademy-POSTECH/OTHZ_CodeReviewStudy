@@ -31,7 +31,7 @@ struct ListItemView: View {
     var body: some View {
         VStack {
             VStack(alignment: .center) {
-                if isEdit == true {
+                if isEdit {
                     
                     Image(uiImage: image)
                         .resizable()
@@ -58,7 +58,7 @@ struct ListItemView: View {
             
             
             VStack(alignment: .leading) {
-                if isEdit == true {
+                if isEdit {
                     TextField("제목", text: $title, axis: .vertical)
                         .title()
                         .padding(.bottom, 9)
@@ -103,7 +103,7 @@ struct ListItemView: View {
                         }
                     }
                 }
-                if isEdit == true {
+                if isEdit {
                     Button {
                         self.isDelete = true
                     } label: {
@@ -130,7 +130,7 @@ struct ListItemView: View {
         
         }
         .toolbar {
-            if isEdit == true {
+            if isEdit {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
                         self.title = item.title
@@ -223,7 +223,7 @@ struct ListItemViewForPrev: View {
     )
     
     var body: some View {
-            ListItemView(item: $item)
+            ListItemView(item: $item, image: UIImage(named: "addItemDefault")!)
     }
 }
 

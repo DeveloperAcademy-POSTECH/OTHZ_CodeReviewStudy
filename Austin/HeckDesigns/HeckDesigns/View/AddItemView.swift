@@ -129,7 +129,8 @@ extension AddItemView {
                            description: String,
                            group: GroupType,
                            id: Int) {
-        if selectedType == .heck {
+        switch selectedType {
+        case .heck:
             listModel.heckList.append(
                 ListItem(
                     title: title,
@@ -140,7 +141,7 @@ extension AddItemView {
                     uid: String(newId)
                 )
             )
-        } else if selectedType == .issue {
+        case .nice:
             listModel.issueList.append(
                 ListItem(
                     title: title,
@@ -151,7 +152,7 @@ extension AddItemView {
                     uid: String(newId)
                 )
             )
-        }  else if selectedType == .nice {
+        case .issue:
             listModel.niceList.append(
                 ListItem(
                     title: title,
@@ -169,12 +170,7 @@ extension AddItemView {
                         description: String,
                         group: GroupType,
                         id: Int){
-        fileManager.saveImage(image: self.selectedImage, name: "item\(newId)", onSuccess: { res in
-            if res == true {
-                print("write success")
-            } else {
-                print("write fail")
-            }
+        fileManager.saveImage(image: self.selectedImage, name: "item\(newId)", onSuccess: { _ in
             isLoading = false
         })
         
