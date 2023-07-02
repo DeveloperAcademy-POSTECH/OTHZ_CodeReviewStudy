@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @ObservedObject var listModel = ListModel.shared
+    @ObservedObject private var listModel = ListModel.shared
     var groupType: GroupType = .heck
-    let columns = [ GridItem(.adaptive(minimum: 170)) ]
-    @State var gridList = ListModel.shared.heckList
+    private let columns = [ GridItem(.adaptive(minimum: 170)) ]
+    @State private var gridList = ListModel.shared.heckList
     
     var body: some View {
         ScrollView {
-            
             LazyVGrid(columns: columns) {
                 ForEach($gridList, id: \.self) { $item in
-                    if item.isFavorite == true {
+                    if item.isFavorite {
                         NavigationLink {
                             ListItemView(item: $item)
                         } label: {
@@ -38,12 +37,13 @@ struct FavoritesView: View {
             }
         }
         .onAppear {
-            if groupType == .heck {
+            switch groupType {
+            case .heck:
                 gridList = ListModel.shared.heckList
-            } else if groupType == .issue {
-                gridList = ListModel.shared.issueList
-            } else if groupType == .nice {
+            case .nice:
                 gridList = ListModel.shared.niceList
+            case .issue:
+                gridList = ListModel.shared.issueList
             }
         }
         .navigationTitle("Favorites")

@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct AddItemView: View {
-    let fileManager = ImageFileManager.shared
-    let dbHelper = DBHelper.shared
-    var groupTypes: [GroupType] = [.heck, .nice, .issue]
-    var listModel = ListModel.shared
+    private let fileManager = ImageFileManager.shared
+    private let dbHelper = DBHelper.shared
+    private var groupTypes: [GroupType] = [.heck, .nice, .issue]
+    private let listModel = ListModel.shared
     
     @Environment(\.presentationMode) var presentationMode
-    @State var title = ""
-    @State var description = ""
+    @State private var title = ""
+    @State private var description = ""
     @State var selectedType: GroupType = .heck
-    @State var selectedImage = UIImage(named: "addItemDefault")!
-    @State var isSelecting = false
-    @State var isLoading = false
-    @State var newId = 0
+    @State private var selectedImage = UIImage(named: "addItemDefault")!
+    @State private var isSelecting = false
+    @State private var isLoading = false
+    @State private var newId = 0
     
     
     

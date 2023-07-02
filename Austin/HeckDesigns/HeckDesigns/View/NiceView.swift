@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct NiceView: View {
-    @State var showAddModal = false
-    @ObservedObject var listModel = ListModel.shared
+    @State private var showAddModal = false
+    @ObservedObject private var listModel = ListModel.shared
     
-    let columns = [
-            GridItem(.adaptive(minimum: 170))
-        ]
+    private let columns = [GridItem(.adaptive(minimum: 170))]
 
     var body: some View {
         NavigationStack {
@@ -66,7 +64,7 @@ struct NiceView: View {
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView(selectedType: .nice)
+                AddItemView()
             }
             .navigationTitle("Nice")
         }

@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct IssueView: View {
-    @State var showAddModal = false
-    @ObservedObject var listModel = ListModel.shared
-//    let columns = [GridItem(.adaptive(minimum: 170))]
+    @State private var showAddModal = false
+    @ObservedObject private var listModel = ListModel.shared
     
     var body: some View {
         NavigationStack {
@@ -38,6 +37,7 @@ struct IssueView: View {
                                         .description()
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(5)
+                                    
                                 }
                             }
                         }
@@ -57,7 +57,7 @@ struct IssueView: View {
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView(selectedType: .issue)
+                AddItemView()
             }
             .navigationTitle("Issue")
         }

@@ -19,7 +19,7 @@ struct DBModel: Codable, Hashable {
 }
 
 
-class DBHelper : HeckDesignTableProtocol {
+class DBHelper {
     
     static let shared = DBHelper()
     

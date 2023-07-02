@@ -29,7 +29,7 @@ struct FavoriteSampleView: View {
             ScrollView(.horizontal, showsIndicators: false){
                 HStack {
                     ForEach($scrollList, id: \.self) { $item in
-                        if item.isFavorite == true {
+                        if item.isFavorite {
                             NavigationLink {
                                 ListItemView(item: $item)
                             } label: {
@@ -54,11 +54,12 @@ struct FavoriteSampleView: View {
             
         }
         .onAppear {
-            if groupType == .heck {
+            switch groupType {
+            case .heck:
                 scrollList = ListModel.shared.heckList
-            } else if groupType == .nice {
+            case .nice:
                 scrollList = ListModel.shared.niceList
-            } else if groupType == .issue {
+            case .issue:
                 scrollList = ListModel.shared.issueList
             }
         }

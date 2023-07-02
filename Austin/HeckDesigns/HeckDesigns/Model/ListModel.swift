@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum GroupType: String {
+enum GroupType: String, CaseIterable {
     case heck
     case nice
     case issue
@@ -25,6 +25,7 @@ enum GroupType: String {
         }
     }
 }
+
 
 struct ListItem: Hashable {
     var title: String
