@@ -13,19 +13,17 @@ struct DBModel: Codable, Hashable {
     var title: String
     var description: String
     var groupType: String
-    var isFavorite: Int32
+    var isFavorite: Bool
     var imageName: String
     var uid: String
 }
 
 
-class DBHelper : HeckDesignTableProtocol {
+class DBHelper {
     
     static let shared = DBHelper()
     
-    //db를 가리키는 포인터
     var db : OpaquePointer?
-    // db 이름은 항상 "db이름.sqlite" 형식으로 해주기
     let databaseName = "mydb.sqlite"
     
     init() {
@@ -35,8 +33,7 @@ class DBHelper : HeckDesignTableProtocol {
         sqlite3_close(db)
     }
     
-    //db를 성공적으로 생성할 경우 생성한 DB 포인터를 반환한다.
-    //OpaquePointer는 sqlite 전용 포인터이다.
+    /// DB 생성
     private func createDB() -> OpaquePointer? {
         var db: OpaquePointer? = nil
         
@@ -58,14 +55,8 @@ class DBHelper : HeckDesignTableProtocol {
         return nil
     }
     
+    /// table 이 없는 경우에 table 생성
     func createTable(){
-        // 아래 query의 뜻.
-        // mytable이라는 table을 생성한다. 필드는
-        // id(int, auto-increment primary key)
-        // my_name(String not null)
-        // my_age(Int)
-        // 로 구성한다.
-        // auto-increment 속성은 INTEGER에만 가능하다.
         let query = """
            CREATE TABLE IF NOT EXISTS heckTable(
            id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -77,11 +68,8 @@ class DBHelper : HeckDesignTableProtocol {
            uid TEXT
            ) ;
            """
-//        `isF` INTEGER NOT NULL,
         var statement: OpaquePointer? = nil
-        //prepare는 쿼리를 실행할 준비를 하는 단계
         if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
-            //step은 쿼리를 실행하는 단계
             if sqlite3_step(statement) == SQLITE_DONE {
                 print("Creating table has been succesfully done. db: \(String(describing: self.db))")
                 
@@ -96,11 +84,11 @@ class DBHelper : HeckDesignTableProtocol {
             print("\nsqlite3_prepare failure while creating table: \(errorMessage)")
         }
         
-        sqlite3_finalize(statement) // 메모리에서 sqlite3 할당 해제.
+        sqlite3_finalize(statement)
     }
     
-    func insertData(title: String, description: String, isFavorite: Int = 0,group: GroupType, imageName: String, uid: String) {
-       // id 는 Auto increment 속성을 갖고 있기에 빼줌.
+    /// 새로운 ListItem 추가
+    func insertData(title: String, description: String, isFavorite: Bool = false,group: GroupType, imageName: String, uid: String) {
        let insertQuery = """
         insert into heckTable (
         `id`,
@@ -115,12 +103,10 @@ class DBHelper : HeckDesignTableProtocol {
        var statement: OpaquePointer? = nil
        
        if sqlite3_prepare_v2(self.db, insertQuery, -1, &statement, nil) == SQLITE_OK {
-           //sqlite3_bind_text의 두 번째 인자는 values(?, ?, ?) 에서 몇 번째 ?에 넣을거냐를 지정합니다.
-           //세 번째 인자는 들어갈 값이 되겠습니다.
            sqlite3_bind_text(statement, 2, title, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
            sqlite3_bind_text(statement, 3, description, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
            sqlite3_bind_text(statement, 4, group.rawValue, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
-           sqlite3_bind_int(statement, 5, Int32(isFavorite))
+           sqlite3_bind_int(statement, 5, Int32(isFavorite ? 1 : 0))
            sqlite3_bind_text(statement, 6, imageName, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
            sqlite3_bind_text(statement, 7, uid, -1, unsafeBitCast(-1, to: sqlite3_destructor_type.self))
        }
@@ -137,12 +123,10 @@ class DBHelper : HeckDesignTableProtocol {
        }
     }
 
-    // 반환할 때 readSafety가 아닌 배열 반환하면 안됨
+    /// DB에서 데이터를 읽어와서 DBMode 배열 리턴
     func readData() -> [DBModel] {
         let query: String = "select * from heckTable;"
         var statement: OpaquePointer? = nil
-        // 아래는 [MyModel]? 이 되면 값이 안 들어간다.
-        // Nil을 인식하지 못하는 것으로..
         var result: [DBModel] = []
 
         if sqlite3_prepare(self.db, query, -1, &statement, nil) != SQLITE_OK {
@@ -151,13 +135,12 @@ class DBHelper : HeckDesignTableProtocol {
             return result
         }
         while sqlite3_step(statement) == SQLITE_ROW {
-            //반드시 아래와 같이 사용
-            let id = sqlite3_column_int(statement, 0) // 결과의 0번째 테이블 값
-            let title = String(cString: sqlite3_column_text(statement, 1)) // 결과의 1번째 테이블 값.
-            let description = String(cString: sqlite3_column_text(statement, 2)) // 결과의 1번째 테이블 값.
-            let groupType = String(cString: sqlite3_column_text(statement, 3)) // 결과의 1번째 테이블 값.
-            let isFavorite = sqlite3_column_int(statement, 4) // 결과의 2번째 테이블 값.
-            let imageName = String(cString: sqlite3_column_text(statement, 5)) // 결과의 1번째 테이블 값.
+            let id = sqlite3_column_int(statement, 0)
+            let title = String(cString: sqlite3_column_text(statement, 1))
+            let description = String(cString: sqlite3_column_text(statement, 2))
+            let groupType = String(cString: sqlite3_column_text(statement, 3))
+            let isFavorite = sqlite3_column_int(statement, 4)
+            let imageName = String(cString: sqlite3_column_text(statement, 5))
             let uid = String(cString: sqlite3_column_text(statement, 6))
             
             result.append(DBModel(
@@ -165,7 +148,7 @@ class DBHelper : HeckDesignTableProtocol {
                 title: title,
                 description: description,
                 groupType: groupType,
-                isFavorite: isFavorite,
+                isFavorite: !(isFavorite == 0),
                 imageName: imageName,
                 uid: uid
             ))
@@ -175,6 +158,7 @@ class DBHelper : HeckDesignTableProtocol {
         return result
     }
     
+    /// 기존의 ListItem 데이터 변경
     func updateData(
         id: Int,
         title: String,
@@ -184,22 +168,18 @@ class DBHelper : HeckDesignTableProtocol {
         imageName: String
     ) {
         var statement: OpaquePointer?
-        // 등호 기호는 =이 아니라 ==이다.
-        // string 부분은 작은 따옴표 두 개로 감싸줘야 한다.
         let queryString = """
             UPDATE heckTable SET title = '\(title)',
             description = '\(description)',
             group_type = '\(groupType.rawValue)',
-            is_favorite = \(isFavorite == true ? 1 : 0),
+            is_favorite = \(isFavorite ? 1 : 0),
             image_name = '\(imageName)' WHERE id == \(id)
         """
         
-        // 쿼리 준비.
         if sqlite3_prepare(db, queryString, -1, &statement, nil) != SQLITE_OK {
             onSQLErrorPrintErrorMessage(db)
             return
         }
-        // 쿼리 실행.
         if sqlite3_step(statement) != SQLITE_DONE {
             onSQLErrorPrintErrorMessage(db)
             return
@@ -208,7 +188,7 @@ class DBHelper : HeckDesignTableProtocol {
         print("Update has been successfully done")
     }
     
-    //id 값에 따라 삭제
+    /// id 값으로 ListItem 제거
     func deleteData(id: Int) {
             let queryString = "DELETE from heckTable WHERE id == \(id);"
             var statement: OpaquePointer?
@@ -219,8 +199,6 @@ class DBHelper : HeckDesignTableProtocol {
             }
             
 
-            
-            // 쿼리 실행.
             if sqlite3_step(statement) != SQLITE_DONE {
                 onSQLErrorPrintErrorMessage(db)
                 return
@@ -229,7 +207,7 @@ class DBHelper : HeckDesignTableProtocol {
             print("delete has been successfully done")
         }
     
-    //테이블 삭제
+    /// 테이블 삭제
     func dropTable(tableName: String) {
         let queryString = "DROP TABLE \(tableName)"
         var statement: OpaquePointer?
@@ -239,14 +217,12 @@ class DBHelper : HeckDesignTableProtocol {
             return
         }
         
-        // 쿼리 실행.
         if sqlite3_step(statement) != SQLITE_DONE {
             onSQLErrorPrintErrorMessage(db)
             return
         }
         
         print("drop table has been successfully done")
-        
     }
     
     

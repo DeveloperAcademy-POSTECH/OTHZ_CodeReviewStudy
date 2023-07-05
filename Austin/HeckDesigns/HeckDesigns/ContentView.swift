@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    let fileManager = ImageFileManager.shared
-    let dbHelper = DBHelper.shared
-    let model = Model.instance
+    private let fileManager = ImageFileManager.shared
+    private let dbHelper = DBHelper.shared
+    private let listModel = ListModel.shared
     @State var selectedTab = 0
     
     
     var body: some View {
         TabView {
-            
             HeckView()
                 .tabItem {
                     Image(systemName: "exclamationmark.bubble.fill")
@@ -37,44 +36,46 @@ struct ContentView: View {
             dbHelper.createTable()
             let dbData = dbHelper.readData()
             dbData.forEach { data in
-                if data.groupType == "Heck" {
-                    model.heckList.append(
+                switch data.groupType {
+                case "heck":
+                    listModel.heckList.append(
                         ListItem(
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
-                            group: .Heck,
-                            isFavorite: data.isFavorite == 0 ? false : true,
+                            group: .heck,
+                            isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid
                         )
                     )
-                } else if data.groupType == "Nice" {
-                    model.niceList.append(
+                case "nice":
+                    listModel.niceList.append(
                         ListItem(
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
-                            group: .Nice,
-                            isFavorite: data.isFavorite == 0 ? false : true,
+                            group: .nice,
+                            isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid
                         )
                     )
-                } else if data.groupType == "Issue" {
-                    model.issueList.append(
+                case "issue":
+                    listModel.issueList.append(
                         ListItem(
                             title: data.title,
                             image: fileManager.getSavedImage(named: "\(data.imageName)"),
                             description: data.description,
-                            group: .Issue,
-                            isFavorite: data.isFavorite == 0 ? false : true,
+                            group: .issue,
+                            isFavorite: data.isFavorite,
                             id: Int(data.id),
                             uid: data.uid
                         )
                     )
+                default:
+                    print("")
                 }
-                
             }
         }
     }

@@ -9,16 +9,15 @@ import SwiftUI
 
 
 struct HeckView: View {
-    @State var showAddModal = false
-    @ObservedObject var model = Model.instance
-    let dbHelper = DBHelper.shared
-    
-    let columns = [ GridItem(.adaptive(minimum: 170)) ]
+    @State private var showAddModal = false
+    @ObservedObject private var model = ListModel.shared
+    private let dbHelper = DBHelper.shared
+    private let columns = [ GridItem(.adaptive(minimum: 170)) ]
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                FavoriteSampleView(groupType: .Heck)
+                FavoriteSampleView(groupType: .heck)
                 Button {
                     dbHelper.dropTable(tableName: "heckTable")
                 } label: {
@@ -72,7 +71,7 @@ struct HeckView: View {
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView(selectedType: .Heck)
+                AddItemView()
             }
             
         }

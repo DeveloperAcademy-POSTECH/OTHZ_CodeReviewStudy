@@ -8,20 +8,18 @@
 import SwiftUI
 
 struct NiceView: View {
-    @State var showAddModal = false
-    @ObservedObject var model = Model.instance
+    @State private var showAddModal = false
+    @ObservedObject private var listModel = ListModel.shared
     
-    let columns = [
-            GridItem(.adaptive(minimum: 170))
-        ]
+    private let columns = [GridItem(.adaptive(minimum: 170))]
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                FavoriteSampleView(groupType: .Nice)
+                FavoriteSampleView(groupType: .nice)
                 
                 LazyVGrid(columns: columns) {
-                    ForEach($model.niceList, id: \.self) { $item in
+                    ForEach($listModel.niceList, id: \.self) { $item in
                         NavigationLink {
                             ListItemView(item: $item)
                         } label: {
@@ -66,7 +64,7 @@ struct NiceView: View {
                 }
             }
             .sheet(isPresented: $showAddModal) {
-                AddItemView(selectedType: .Nice)
+                AddItemView()
             }
             .navigationTitle("Nice")
         }

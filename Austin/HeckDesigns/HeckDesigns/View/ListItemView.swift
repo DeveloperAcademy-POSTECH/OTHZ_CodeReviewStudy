@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ListItemView: View {
-    let fileManager = ImageFileManager.shared
-    let model = Model.instance
-    let dbHelper = DBHelper.shared
+    private let fileManager = ImageFileManager.shared
+    private let listModel = ListModel.shared
+    private let dbHelper = DBHelper.shared
     @Environment(\.presentationMode) var presentationMode
     
-    enum Field: Hashable {
+    private enum Field: Hashable {
         case title, description
     }
     @Binding var item: ListItem
@@ -31,7 +31,7 @@ struct ListItemView: View {
     var body: some View {
         VStack {
             VStack(alignment: .center) {
-                if isEdit == true {
+                if isEdit {
                     
                     Image(uiImage: image)
                         .resizable()
@@ -58,7 +58,7 @@ struct ListItemView: View {
             
             
             VStack(alignment: .leading) {
-                if isEdit == true {
+                if isEdit {
                     TextField("제목", text: $title, axis: .vertical)
                         .title()
                         .padding(.bottom, 9)
@@ -103,7 +103,7 @@ struct ListItemView: View {
                         }
                     }
                 }
-                if isEdit == true {
+                if isEdit {
                     Button {
                         self.isDelete = true
                     } label: {
@@ -130,7 +130,7 @@ struct ListItemView: View {
         
         }
         .toolbar {
-            if isEdit == true {
+            if isEdit {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
                         self.title = item.title
@@ -181,14 +181,15 @@ struct ListItemView: View {
     }
 }
 
-extension ListItemView {
+private extension ListItemView {
+    
     func toggleIsFavorite(){
         dbHelper.updateData(id: item.id, title: self.title, description: self.description, groupType: item.group, isFavorite: item.isFavorite == true ? false : true, imageName: "item\(item.uid)")
         item.isFavorite.toggle()
         isFavorite.toggle()
     }
     func deleteItem(){
-        model.heckList = model.heckList.filter {
+        listModel.heckList = listModel.heckList.filter {
             $0.id != item.id
         }
         isEdit = false
@@ -197,7 +198,9 @@ extension ListItemView {
         }
         
         presentationMode.wrappedValue.dismiss()
+
     }
+    
     func updateItem(){
         item.title = self.title
         item.description = self.description
@@ -212,24 +215,25 @@ extension ListItemView {
 }
 
 
-struct ListItemViewForPrev: View {
-    @State var item = ListItem(
-        title: "감성과 안전사이",
-        image: UIImage(named: "heck0")!,
-        description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
-        group: .Heck,
-        id: 0,
-        uid: "14"
-    )
-    
-    var body: some View {
-            ListItemView(item: $item)
-    }
-}
 
 
 
 struct ListItemView_Previews: PreviewProvider {
+    private struct ListItemViewForPrev: View {
+        @State var item = ListItem(
+            title: "감성과 안전사이",
+            image: UIImage(named: "heck0")!,
+            description: "안전은 어디에 있는가, 감성적인 분위기를 위해 너무 눈에 띄지 않는 문구는 열받게 한다 정말",
+            group: .heck,
+            id: 0,
+            uid: "14"
+        )
+        
+        var body: some View {
+                ListItemView(item: $item, image: UIImage(named: "addItemDefault")!)
+        }
+    }
+
 
     static var previews: some View {
         ListItemViewForPrev()

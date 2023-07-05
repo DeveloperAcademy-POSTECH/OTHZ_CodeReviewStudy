@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct AddItemView: View {
-    let fileManager = ImageFileManager.shared
-    let dbHelper = DBHelper.shared
-    var groupTypes: [GroupType] = [.Heck, .Nice, .Issue]
-    var model = Model.instance
+    private let fileManager = ImageFileManager.shared
+    private let dbHelper = DBHelper.shared
+    private var groupTypes: [GroupType] = [.heck, .nice, .issue]
+    private let listModel = ListModel.shared
     
     @Environment(\.presentationMode) var presentationMode
-    @State var title = ""
-    @State var description = ""
-    @State var selectedType: GroupType = .Heck
-    @State var selectedImage = UIImage(named: "addItemDefault")!
-    @State var isSelecting = false
-    @State var isLoading = false
-    @State var newId = 0
+    @State private var title = ""
+    @State private var description = ""
+    @State var selectedType: GroupType = .heck
+    @State private var selectedImage = UIImage(named: "addItemDefault")!
+    @State private var isSelecting = false
+    @State private var isLoading = false
+    @State private var newId = 0
     
     
     
@@ -116,7 +116,7 @@ struct AddItemView: View {
                 ImagePicker(selectedImage: $selectedImage)
             }
             .onAppear {
-                newId = model.heckList.count + model.niceList.count + model.issueList.count + 1
+                newId = listModel.heckList.count + listModel.niceList.count + listModel.issueList.count + 1
             }
         }
     }
@@ -129,35 +129,36 @@ extension AddItemView {
                            description: String,
                            group: GroupType,
                            id: Int) {
-        if selectedType == .Heck {
-            model.heckList.append(
+        switch selectedType {
+        case .heck:
+            listModel.heckList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
                     description: description,
-                    group: .Heck,
+                    group: .heck,
                     id: newId,
                     uid: String(newId)
                 )
             )
-        } else if selectedType == .Issue {
-            model.issueList.append(
+        case .nice:
+            listModel.issueList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
                     description: description,
-                    group: .Heck,
+                    group: .heck,
                     id: newId,
                     uid: String(newId)
                 )
             )
-        }  else if selectedType == .Nice {
-            model.niceList.append(
+        case .issue:
+            listModel.niceList.append(
                 ListItem(
                     title: title,
                     image: selectedImage,
                     description: description,
-                    group: .Heck,
+                    group: .heck,
                     id: newId,
                     uid: String(newId)
                 )
@@ -169,12 +170,7 @@ extension AddItemView {
                         description: String,
                         group: GroupType,
                         id: Int){
-        fileManager.saveImage(image: self.selectedImage, name: "item\(newId)", onSuccess: { res in
-            if res == true {
-                print("write success")
-            } else {
-                print("write fail")
-            }
+        fileManager.saveImage(image: self.selectedImage, name: "item\(newId)", onSuccess: { _ in
             isLoading = false
         })
         
