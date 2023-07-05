@@ -25,7 +25,6 @@
 		9597A0102A2F5BE70004431D /* IssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A00F2A2F5BE70004431D /* IssueView.swift */; };
 		95A5F84F2A4040C000F781FB /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A5F84E2A4040C000F781FB /* DBHelper.swift */; };
 		95B5168E2A3C159D00D04B69 /* FavoriteSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */; };
-		95F4A7EB2A559180009CFCCA /* GitTestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F4A7EA2A559180009CFCCA /* GitTestFile.swift */; };
 		95F57DBA2A4167AF00516E46 /* DBTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F57DB92A4167AF00516E46 /* DBTestView.swift */; };
 		95F57DBD2A42C48000516E46 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F57DBC2A42C48000516E46 /* ImageFileManager.swift */; };
 		95F57DBF2A42C5CF00516E46 /* ImageSaveTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F57DBE2A42C5CF00516E46 /* ImageSaveTestView.swift */; };
@@ -52,7 +51,6 @@
 		9597A00F2A2F5BE70004431D /* IssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueView.swift; sourceTree = "<group>"; };
 		95A5F84E2A4040C000F781FB /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		95B5168D2A3C159D00D04B69 /* FavoriteSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSampleView.swift; sourceTree = "<group>"; };
-		95F4A7EA2A559180009CFCCA /* GitTestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitTestFile.swift; sourceTree = "<group>"; };
 		95F57DB92A4167AF00516E46 /* DBTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTestView.swift; sourceTree = "<group>"; };
 		95F57DBC2A42C48000516E46 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		95F57DBE2A42C5CF00516E46 /* ImageSaveTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveTestView.swift; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 			children = (
 				95F57DB92A4167AF00516E46 /* DBTestView.swift */,
 				95F57DBE2A42C5CF00516E46 /* ImageSaveTestView.swift */,
-				95F4A7EA2A559180009CFCCA /* GitTestFile.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -267,7 +264,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95F4A7EB2A559180009CFCCA /* GitTestFile.swift in Sources */,
 				9552C8062A35FCD600417339 /* ViewExtension.swift in Sources */,
 				9552C8082A35FE7200417339 /* TextModifier.swift in Sources */,
 				9552C8012A31D04800417339 /* ListModel.swift in Sources */,
